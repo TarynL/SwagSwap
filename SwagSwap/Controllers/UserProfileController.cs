@@ -43,10 +43,10 @@ namespace SwagSwap.Controllers
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
-            if (string.IsNullOrWhiteSpace(userProfile.ImageUrl))
-            {
-                userProfile.ImageUrl = "https://robohash.org/N60.png?set=set3&size=150x150";
-            };
+            //if (string.IsNullOrWhiteSpace(userProfile.ImageUrl))
+            //{
+            //    userProfile.ImageUrl = "https://robohash.org/N60.png?set=set3&size=150x150";
+            //};
             _userProfileRepository.Add(userProfile);
             return CreatedAtAction(
                 nameof(GetUserProfile),
