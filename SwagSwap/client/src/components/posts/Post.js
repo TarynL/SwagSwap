@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardBody } from "reactstrap";
+import PostDetails from "./PostDetails";
 
 const Post = ({ post }) => {
 
