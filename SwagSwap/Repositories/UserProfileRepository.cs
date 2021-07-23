@@ -21,7 +21,7 @@ namespace SwagSwap.Repositories
                 {
                     cmd.CommandText = @"
                         SELECT Id, FirebaseUserId, FirstName, LastName, DisplayName, 
-                                ImageUrl, Email, UserZip, Rating                               
+                                ImageUrl as ProfileImage, Email, UserZip, Rating                               
                           FROM UserProfile 
                          WHERE FirebaseUserId = @FirebaseuserId";
 
@@ -39,7 +39,7 @@ namespace SwagSwap.Repositories
                             FirstName = DbUtils.GetString(reader, "FirstName"),
                             LastName = DbUtils.GetString(reader, "LastName"),
                             DisplayName = DbUtils.GetString(reader, "DisplayName"),
-                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            ImageUrl = DbUtils.GetString(reader, "ProfileImage"),
                             Email = DbUtils.GetString(reader, "Email"),
                             UserZip = DbUtils.GetInt(reader, "UserZip"),
                             Rating = DbUtils.GetInt(reader, "Rating"),
@@ -59,16 +59,16 @@ namespace SwagSwap.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, ImageUrl,
+                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, ImageUrl as ProfileImage,
                                                                  Email, UserZip, Rating)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, @ImageUrl,
+                                        VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, @PostImage,
                                                 @Email, @UserZip, @Rating)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
                     DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
-                    DbUtils.AddParameter(cmd, "@ImageUrl", userProfile.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@ProfileImage", userProfile.ImageUrl);
                     DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
                     DbUtils.AddParameter(cmd, "@UserZip", userProfile.UserZip);
                     DbUtils.AddParameter(cmd, "@Rating", userProfile.Rating);
@@ -85,7 +85,7 @@ namespace SwagSwap.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                            SELECT Id, FirebaseUserId, FirstName, LastName, DisplayName, 
+                            SELECT Id, FirebaseUserId, FirstName, LastName, DisplayName, ImageUrl as ProfileImage,
                                Email, UserZip, Rating
                           FROM UserProfile 
                             ORDER BY DisplayName";
@@ -102,7 +102,7 @@ namespace SwagSwap.Repositories
                             FirstName = DbUtils.GetString(reader, "FirstName"),
                             LastName = DbUtils.GetString(reader, "LastName"),
                             DisplayName = DbUtils.GetString(reader, "DisplayName"),
-                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            ImageUrl = DbUtils.GetString(reader, "ProfileImage"),
                             Email = DbUtils.GetString(reader, "Email"),
                             UserZip = DbUtils.GetInt(reader, "UserZip"),
                             Rating = DbUtils.GetInt(reader, "Rating"),
@@ -123,7 +123,7 @@ namespace SwagSwap.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                          SELECT Id, FirebaseUserId, FirstName, LastName, DisplayName, 
+                          SELECT Id, FirebaseUserId, FirstName, LastName, DisplayName, ImageUrl as ProfileImage,
                                Email, UserZip, Rating
                           FROM UserProfile 
                           WHERE id = @id ";
@@ -142,7 +142,7 @@ namespace SwagSwap.Repositories
                             FirstName = DbUtils.GetString(reader, "FirstName"),
                             LastName = DbUtils.GetString(reader, "LastName"),
                             DisplayName = DbUtils.GetString(reader, "DisplayName"),
-                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            ImageUrl = DbUtils.GetString(reader, "ProfileImage"),
                             Email = DbUtils.GetString(reader, "Email"),
                             UserZip = DbUtils.GetInt(reader, "UserZip"),
                             Rating = DbUtils.GetInt(reader, "Rating"),

@@ -61,7 +61,7 @@ namespace SwagSwap.Controllers
         }
         
 
-        [HttpGet("{id}")]
+        [HttpGet("details/{id}")]
         public IActionResult GetUserById(int id)
         {
             var user = _userProfileRepository.GetUserById(id);
@@ -71,22 +71,6 @@ namespace SwagSwap.Controllers
             }
             return Ok(user);
         }
-        // POST api/<UserProfileController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        //// PUT api/<UserProfileController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<UserProfileController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        
     }
 }

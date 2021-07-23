@@ -23,14 +23,14 @@ namespace SwagSwap.Repositories
                             SELECT p.Id, p.UserId, p.Title, p.Description,  p.Value, 
                               p.ImageUrl AS PostImage,
                               p.PostedDate,
-                              p.CategoryId,  p.Size,
-                              c.[Name] AS CategoryName,
+                              p.CategoryId,  p.Size, c.Id as CategoryId,
+                              c.[Name] AS CategoryName, u.Id as UserProfileId, u.FirebaseUserId,
                               u.FirstName, u.LastName, u.DisplayName, 
-                              u.ImageUrl AS ProfileImage, u.Email, u.UserZip,                               u.UserTypeId, 
-                              u.Rating, u.FirebaseUserId
-                         FROM Post p
+                              u.ImageUrl AS ProfileImage, u.Email, u.UserZip,                               
+                              u.Rating
+                         FROM Posts p
                               LEFT JOIN Categories c ON p.CategoryId = c.id
-                              LEFT JOIN UserProfile u ON p.UserProfileId = u.id
+                              LEFT JOIN UserProfile u ON p.UserId = u.id
                          ORDER BY p.PostedDate DESC";
                     var reader = cmd.ExecuteReader();
 
@@ -57,17 +57,17 @@ namespace SwagSwap.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT p.Id, p.UserId, p.Title, p.Description,  p.Value, 
+                        SELECT p.Id, p.UserId, p.Title, p.Description,  p.Value, 
                               p.ImageUrl AS PostImage,
                               p.PostedDate,
-                              p.CategoryId,  p.Size,
-                              c.[Name] AS CategoryName,
+                              p.CategoryId,  p.Size, c.Id as CategoryId,
+                              c.[Name] AS CategoryName, u.Id as UserProfileId, u.FirebaseUserId,
                               u.FirstName, u.LastName, u.DisplayName, 
-                              u.ImageUrl AS ProfileImage, u.Email, u.UserZip,                               u.UserTypeId, 
-                              u.Rating, u.FirebaseUserId
-                         FROM Post p
+                              u.ImageUrl AS ProfileImage, u.Email, u.UserZip,                               
+                              u.Rating
+                         FROM Posts p
                               LEFT JOIN Categories c ON p.CategoryId = c.id
-                              LEFT JOIN UserProfile u ON p.UserProfileId = u.id
+                              LEFT JOIN UserProfile u ON p.UserId = u.id
                         WHERE FirebaseUserId = @FirebaseUserId 
                     ORDER BY p.PostedDate DESC";
                     DbUtils.AddParameter(cmd, "@firebaseUserId", firebaseUserId);
@@ -94,17 +94,17 @@ namespace SwagSwap.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                   SELECT   SELECT p.Id, p.UserId, p.Title, p.Description,  p.Value, 
+                    SELECT p.Id, p.UserId, p.Title, p.Description,  p.Value, 
                               p.ImageUrl AS PostImage,
                               p.PostedDate,
-                              p.CategoryId,  p.Size,
-                              c.[Name] AS CategoryName,
+                              p.CategoryId,  p.Size, c.Id as CategoryId,
+                              c.[Name] AS CategoryName, u.Id as UserProfileId, u.FirebaseUserId,
                               u.FirstName, u.LastName, u.DisplayName, 
-                              u.ImageUrl AS ProfileImage, u.Email, u.UserZip,                               u.UserTypeId, 
-                              u.Rating, u.FirebaseUserId
-                         FROM Post p
+                              u.ImageUrl AS ProfileImage, u.Email, u.UserZip,                               
+                              u.Rating
+                         FROM Posts p
                               LEFT JOIN Categories c ON p.CategoryId = c.id
-                              LEFT JOIN UserProfile u ON p.UserProfileId = u.id
+                              LEFT JOIN UserProfile u ON p.UserId = u.id
                          WHERE p.id = @id";
 
                     DbUtils.AddParameter(cmd, "@id", id);
@@ -132,7 +132,7 @@ namespace SwagSwap.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        INSERT INTO Post (
+                        INSERT INTO Posts (
                             Title, UserId, Description, Value, ImageUrl, PostedDate, CategoryId, Size )
                         OUTPUT INSERTED.ID
                         VALUES (
@@ -163,12 +163,44 @@ namespace SwagSwap.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                            DELETE Post                           
+                            DELETE Posts                           
                             WHERE Id = @id
                         ";
 
                     DbUtils.AddParameter(cmd, "@id", id);
 
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdatePost(Post post)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Posts 
+                            SET
+                                
+                                Title = @title,
+                                Description = @description,
+                                ImageUrl = @imageUrl,
+                                Value = @value,
+                                CategoryId = @categoryId,
+                                Size = @Size
+                                WHERE Id = @id";
+
+                    DbUtils.AddParameter(cmd, "@title", post.Title);
+                    DbUtils.AddParameter(cmd, "@description", post.Description);
+                    DbUtils.AddParameter(cmd, "@ImageUrl", post.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@value", post.Value);
+                    DbUtils.AddParameter(cmd, "@categoryId", post.CategoryId);
+                    DbUtils.AddParameter(cmd, "@size", post.Size);
+                    DbUtils.AddParameter(cmd, "@Id", post.Id);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -195,7 +227,7 @@ namespace SwagSwap.Repositories
                 UserId = DbUtils.GetInt(reader, "UserId"),
                 UserProfile = new UserProfile()
                 {
-                    Id = DbUtils.GetInt(reader, "Id"),
+                    Id = DbUtils.GetInt(reader, "UserProfileId"),
                     FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
                     FirstName = DbUtils.GetString(reader, "FirstName"),
                     LastName = DbUtils.GetString(reader, "LastName"),
@@ -209,34 +241,6 @@ namespace SwagSwap.Repositories
             };
         }
 
-        public void UpdatePost(Post post)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                        UPDATE Post 
-                            SET
-                                
-                                Title = @title,
-                                Content = @content,
-                                ImageLocation = @imageLocation,
-                                PublishDateTime = @publishDateTime,
-                                CategoryId = @categoryId
-                                WHERE Id = @id";
-
-                    DbUtils.AddParameter(cmd, "@title", post.Title);
-                    DbUtils.AddParameter(cmd, "@content", post.Content);
-                    DbUtils.AddParameter(cmd, "@ImageLocation", post.ImageLocation);
-                    DbUtils.AddParameter(cmd, "@publishDateTime", post.PublishDateTime);
-                    DbUtils.AddParameter(cmd, "@categoryId", post.CategoryId);
-                    DbUtils.AddParameter(cmd, "@Id", post.Id);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
+       
     }
 }
