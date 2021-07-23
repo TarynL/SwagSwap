@@ -6,6 +6,7 @@ import Register from "./Register";
 import PostList from "./posts/PostList";
 import MyPostList from "./myPosts/myPostList";
 import MyPostForm from "./myPosts/myPostForm";
+import MyPostEdit from "./myPosts/myPostEdit";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -23,6 +24,9 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <MyPostForm /> : <Redirect to="/login" />}
                 </Route>
 
+                <Route path="/post/edit/:id" exact>
+                    {isLoggedIn ? <MyPostEdit /> : <Redirect to="/login" />}
+                </Route>
 
 
                 <Route path="/login">
