@@ -142,7 +142,7 @@ namespace SwagSwap.Repositories
                     DbUtils.AddParameter(cmd, "@UserId", post.UserId);
                     DbUtils.AddParameter(cmd, "@Description", post.Description);
                     DbUtils.AddParameter(cmd, "@Value", post.Value);
-                    DbUtils.AddParameter(cmd, "@ImageUr;", post.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@ImageUrl", post.ImageUrl);
                     DbUtils.AddParameter(cmd, "@PostedDate", post.PostedDate);
                     DbUtils.AddParameter(cmd, "@CategoryId", post.CategoryId);
                     DbUtils.AddParameter(cmd, "@Size", post.Size);

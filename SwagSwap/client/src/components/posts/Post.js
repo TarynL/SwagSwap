@@ -5,8 +5,8 @@ const Post = ({ post }) => {
 
     return (
         <Card className="container w-50 m-2 p-2">
-            <CardBody className="card-content-category">
-                <img src={post.imageUrl} />
+            <CardBody className="card-content">
+                <img className="postImage" src={post.imageUrl} />
             </CardBody>
 
         </Card>

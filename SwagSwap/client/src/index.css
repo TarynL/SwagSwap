@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.postImage {
+  height: 300px;
+  width: 200px;
+}
+
+

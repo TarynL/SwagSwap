@@ -6,7 +6,7 @@ const MyPost = ({ myPost }) => {
     return (
         <Card className="container w-50 m-2 p-2">
             <CardBody className="card-content-category">
-                <img src={myPost.imageUrl} />
+                <img className="postImage" src={myPost.imageUrl} />
                 <button className="btn btn-light">Edit</button>
                 <button className="btn btn-light">Delete</button>
                 {/* <Link to={`/category/${category.id}`}>
