@@ -19,9 +19,9 @@ const MyPostList = () => {
 
 
         <div className="container m-2 p-2">
-            {/* {/* <Link to={`/post/add`}> */}
-            <button className="btn btn-secondary" >Add New Post</button>
-            {/* </Link> */}
+            <Link to={`/post/add`}>
+                <button className="btn btn-secondary" >Add New Post</button>
+            </Link>
 
             {myPosts.map((myPost) => (
                 <MyPost myPost={myPost} key={myPost.id} />
