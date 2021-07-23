@@ -17,7 +17,7 @@ const PostDetails = () => {
     }
 
     const handleDate = () => {
-        let date = new Date(postDetails.publishDateTime).toDateString();
+        let date = new Date(postDetails.postedDate).toDateString();
         return date;
     };
 
@@ -36,6 +36,7 @@ const PostDetails = () => {
                     <p><b>Value: $</b>{postDetails.value}</p>
                     <p><b>Date Posted: </b>{handleDate()}</p>
                     <p><b>Posted By: </b>{postDetails.userProfile?.displayName}</p>
+                    <button>Message Now</button>
                     {/* <Link to={`/message/add/${postDetails.id}`}>
                     <Button className="btn btn-success">Message</Button>
                 </Link> */}
