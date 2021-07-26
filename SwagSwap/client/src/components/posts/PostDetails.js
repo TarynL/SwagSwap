@@ -3,12 +3,13 @@ import { Card, CardBody, ListGroupItem, ListGroup, Button } from "reactstrap";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { getPostById } from "../../modules/postManager";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 
 const PostDetails = () => {
     const [postDetails, setPostDetails] = useState({});
     const { id } = useParams();
+    const history = useHistory();
 
 
     const getPostDetails = () => {
@@ -38,6 +39,8 @@ const PostDetails = () => {
                     <p><b>Date Posted: </b>{handleDate()}</p>
                     <p><b>Posted By: </b>{postDetails.userProfile?.displayName}</p>
                     <button>Message Now</button>
+                    <Button className="btn btn-primary" onClick={() => history.push(`/`)}>Go Back</Button>
+
                     {/* <Link to={`/message/add/${postDetails.id}`}>
                     <Button className="btn btn-success">Message</Button>
                 </Link> */}
