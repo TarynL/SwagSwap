@@ -8,6 +8,7 @@ import MyPostList from "./myPosts/myPostList";
 import MyPostForm from "./myPosts/myPostForm";
 import MyPostEdit from "./myPosts/myPostEdit";
 import PostDetails from "./posts/PostDetails";
+import MessageList from "./messages/MessageList";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -31,6 +32,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/post/:id" exact>
                     {isLoggedIn ? <PostDetails /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/messages" exact>
+                    {isLoggedIn ? <MessageList /> : <Redirect to="/login" />}
                 </Route>
 
 

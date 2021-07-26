@@ -13,7 +13,7 @@ namespace SwagSwap.Repositories
     {
         public MessageRepository(IConfiguration configuration) : base(configuration) { }
 
-        public List<Message> GetAllMessages()
+        public List<Message> GetAllMessages(string firebaseUserId)
         {
             using (var conn = Connection)
             {
@@ -24,13 +24,18 @@ namespace SwagSwap.Repositories
                                SELECT m.Id as MessageId, m.SenderId, m.RecipientId, m.PostId, m.Content, m.CreateDateTime, 
                                    u.Id as ProfileId, u.FirebaseUserId, u.FirstName, u.LastName, u.DisplayName, u.ImageUrl as ProfileImage, u.Email, 
                                    u.UserZip, u.Rating,
-                                   p.Id as PostId, p.Title, p.Description, p.Value, p.ImageUrl as PostImage, p.PostedDate, p.Size, p.CategoryId,
+                                   p.Id as PostId, p.UserId, p.Title, p.Description, p.Value, p.ImageUrl as PostImage, p.PostedDate, p.Size, p.CategoryId,
                                    c.Id as CatId, c.Name as CategoryName
                             FROM Messages m
-                            LEFT JOIN UserProfile u ON m.RecipientId  = u.Id
+                            LEFT JOIN UserProfile u ON m.RecipientId  = u.Id OR m.SenderId = u.Id
                             LEFT JOIN Posts p ON m.PostId = p.id
-                            LEFT JOIN Categories c ON p.CategoryId = c.id                               
+                            LEFT JOIN Categories c ON p.CategoryId = c.id  
+                                                        WHERE FirebaseUserId = @FirebaseUserId
+
                             ORDER BY m.CreateDateTime DESC ";
+
+                    DbUtils.AddParameter(cmd, "@firebaseUserId", firebaseUserId);
+
 
                     var reader = cmd.ExecuteReader();
 
@@ -60,6 +65,7 @@ namespace SwagSwap.Repositories
                             Post = new Post()
                             {
                                 Id = DbUtils.GetInt(reader, "PostId"),
+                                UserId = DbUtils.GetInt(reader, "UserId"),
                                 Title = DbUtils.GetString(reader, "Title"),
                                 Description = DbUtils.GetString(reader, "Description"),
                                 Value = DbUtils.GetInt(reader, "Value"),
@@ -93,7 +99,7 @@ namespace SwagSwap.Repositories
                                SELECT m.Id as MessageId, m.SenderId, m.RecipientId, m.PostId, m.Content, m.CreateDateTime, 
                                    u.Id as ProfileId, u.FirebaseUserId, u.FirstName, u.LastName, u.DisplayName, u.ImageUrl as ProfileImage, u.Email, 
                                    u.UserZip, u.Rating,
-                                   p.Id as PostId, p.Title, p.Description, p.Value, p.ImageUrl as PostImage, p.PostedDate, p.Size, p.CategoryId,
+                                   p.Id as PostId, p.UserId, p.Title, p.Description, p.Value, p.ImageUrl as PostImage, p.PostedDate, p.Size, p.CategoryId,
                                    c.Id as CatId, c.Name as CategoryName
                             FROM Messages m
                             LEFT JOIN UserProfile u ON m.SenderId  = u.Id
@@ -131,6 +137,7 @@ namespace SwagSwap.Repositories
                             Post = new Post()
                             {
                                 Id = DbUtils.GetInt(reader, "PostId"),
+                                UserId = DbUtils.GetInt(reader, "UserId"),
                                 Title = DbUtils.GetString(reader, "Title"),
                                 Description = DbUtils.GetString(reader, "Description"),
                                 Value = DbUtils.GetInt(reader, "Value"),
@@ -144,7 +151,7 @@ namespace SwagSwap.Repositories
                                     Name = DbUtils.GetString(reader, "CategoryName")
                                 }
                             }
-                        });
+                        }); ;
 
                     }
                     reader.Close();
@@ -165,13 +172,13 @@ namespace SwagSwap.Repositories
                                  SELECT m.Id as MessageId, m.SenderId, m.RecipientId, m.PostId, m.Content, m.CreateDateTime, 
                                    u.Id as ProfileId, u.FirebaseUserId, u.FirstName, u.LastName, u.DisplayName, u.ImageUrl as ProfileImage, u.Email, 
                                    u.UserZip, u.Rating,
-                                   p.Id as PostId, p.Title, p.Description, p.Value, p.ImageUrl as PostImage, p.PostedDate, p.Size, p.CategoryId,
+                                   p.Id as PostId, p.UserId p.Title, p.Description, p.Value, p.ImageUrl as PostImage, p.PostedDate, p.Size, p.CategoryId,
                                    c.Id as CatId, c.Name as CategoryName
                             FROM Messages m
                             LEFT JOIN UserProfile u ON m.SenderId = u.Id
                             LEFT JOIN Posts p ON m.PostId = p.id
                             LEFT JOIN Categories c ON p.CategoryId = c.id
-                            WHERE m.Id = @id
+                            WHERE p.Id = @id
                             ORDER BY m.CreateDateTime DESC
                              ";
 
@@ -205,6 +212,7 @@ namespace SwagSwap.Repositories
                             Post = new Post()
                             {
                                 Id = DbUtils.GetInt(reader, "PostId"),
+                                UserId = DbUtils.GetInt(reader, "UserId"),
                                 Title = DbUtils.GetString(reader, "Title"),
                                 Description = DbUtils.GetString(reader, "Description"),
                                 Value = DbUtils.GetInt(reader, "Value"),

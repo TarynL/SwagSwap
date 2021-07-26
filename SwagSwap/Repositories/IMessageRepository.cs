@@ -5,7 +5,7 @@ namespace SwagSwap.Repositories
 {
     public interface IMessageRepository
     {
-        public List<Message> GetAllMessages();
+        public List<Message> GetAllMessages(string firebaseUserId);
         public List<Message> GetAllMessagesByFirebaseUserId(string firebaseUserId);
 
         public Message GetById(int id);

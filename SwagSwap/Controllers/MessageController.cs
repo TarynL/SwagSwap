@@ -37,20 +37,22 @@ namespace SwagSwap.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(_messageRepository.GetAllMessages());
+            string currentUserProfileId = GetCurrentFirebaseUserProfileId();
+
+            return Ok(_messageRepository.GetAllMessages(currentUserProfileId));
         }
         
         [HttpGet("myMessages/")]
-        public IActionResult GetPostsByUserId()
+        public IActionResult GetMessagesByUserId()
         {
             string currentUserProfileId = GetCurrentFirebaseUserProfileId();
-            var posts = _postRepository.GetAllPostsFromUser(currentUserProfileId);
-            if (posts == null)
+            var messages = _messageRepository.GetAllMessagesByFirebaseUserId(currentUserProfileId);
+            if (messages == null)
             {
                 return NotFound();
             }
 
-            return Ok(posts);
+            return Ok(messages);
         }
 
         // GET api/<MessageController>/5
