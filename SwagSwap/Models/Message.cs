@@ -13,6 +13,8 @@ namespace SwagSwap.Models
         public int SenderId { get; set; }
 
         public int RecipientId { get; set; }
+        public int PostId { get; set; }
+
 
 
         [Required]
@@ -24,5 +26,6 @@ namespace SwagSwap.Models
         public DateTime CreateDateTime { get; set; }
 
         public UserProfile UserProfile { get; set; }
+        public Post Post { get; set; }
     }
 }
