@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { addPost } from '../../modules/postManager';
+import { getAllCategories } from "../../modules/categoryManager";
+
 
 const MyPostForm = () => {
     const emptyPost = {
@@ -14,6 +16,8 @@ const MyPostForm = () => {
     };
 
     const [newPost, setNewPost] = useState(emptyPost);
+    const [category, setCategory] = useState([]);
+
     const history = useHistory();
 
     const handleInputChange = (evt) => {
@@ -26,6 +30,13 @@ const MyPostForm = () => {
         setNewPost(myPostCopy);
     };
 
+    const getCategories = () => {
+        return getAllCategories()
+            .then(categoriesFromAPI => {
+                setCategory(categoriesFromAPI)
+            })
+    }
+
     const handleSave = (evt) => {
         evt.preventDefault();
 
@@ -34,6 +45,10 @@ const MyPostForm = () => {
         });
 
     };
+
+    useEffect(() => {
+        getCategories();
+    }, [])
 
 
 
@@ -66,9 +81,12 @@ const MyPostForm = () => {
             </FormGroup>
             <FormGroup>
                 <Label for="categoryId">Category</Label>
-                <Input type="text" name="categoryId" id="categoryId" placeholder="category"
-                    value={newPost.categoryId}
-                    onChange={handleInputChange} />
+                <select value={newPost.categoryId} name="categoryId" id="categoryId" onChange={handleInputChange} className='form-control'>
+                    <option value="0">Select a Category</option>
+                    {category.map(c => (
+                        <option key={c.id} value={c.id}>{c.name}</option>
+                    ))}
+                </select>
             </FormGroup>
             <FormGroup>
                 <Label for="size">Size</Label>

@@ -17,7 +17,7 @@ const PostDetails = () => {
     }
 
     const handleDate = () => {
-        let date = new Date(postDetails.postedDate).toDateString();
+        let date = new Date(postDetails.postedDate).toLocaleDateString();
         return date;
     };
 
@@ -34,6 +34,7 @@ const PostDetails = () => {
                     <p><b>Title: </b>{postDetails.title}</p>
                     <p><b>Description: </b>{postDetails.description}</p>
                     <p><b>Value: $</b>{postDetails.value}</p>
+                    <p><b>Size: </b>{postDetails.size}</p>
                     <p><b>Date Posted: </b>{handleDate()}</p>
                     <p><b>Posted By: </b>{postDetails.userProfile?.displayName}</p>
                     <button>Message Now</button>
