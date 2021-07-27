@@ -34,36 +34,38 @@ namespace SwagSwap.Controllers
         }
 
         // GET: api/<MessageController>
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            return Ok(_messageRepository.GetAllMessages());
-        }
-        
-        [HttpGet("myMessages/")]
-        public IActionResult GetPostsByUserId()
+        [HttpGet("{id}")]
+        public IActionResult GetAll(int id)
         {
             string currentUserProfileId = GetCurrentFirebaseUserProfileId();
-            var posts = _postRepository.GetAllPostsFromUser(currentUserProfileId);
-            if (posts == null)
-            {
-                return NotFound();
-            }
 
-            return Ok(posts);
+            return Ok(_messageRepository.GetAllMessagesByPostId(currentUserProfileId, id));
         }
+        
+        //[HttpGet("myMessages/")]
+        //public IActionResult GetMessagesByUserId()
+        //{
+        //    string currentUserProfileId = GetCurrentFirebaseUserProfileId();
+        //    var messages = _messageRepository.GetAllMessagesByFirebaseUserId(currentUserProfileId);
+        //    if (messages == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        // GET api/<MessageController>/5
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var message = _messageRepository.GetById(id);
-            if (message == null)
-            {
-                return NotFound();
-            }
-            return Ok(message);
-        }
+        //    return Ok(messages);
+        //}
+
+        //// GET api/<MessageController>/5
+        //[HttpGet("{id}")]
+        //public IActionResult GetById(int id)
+        //{
+        //    var message = _messageRepository.GetById(id);
+        //    if (message == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(message);
+        //}
 
       
         [HttpPost]

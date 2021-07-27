@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:#C1DDD8;
+
 }
 
 code {
@@ -12,10 +14,13 @@ code {
     monospace;
 }
 
+
+
 .postImage {
   height: 300px;
   width: 200px;
 }
+
 
 
 /* .modal {

@@ -31,7 +31,9 @@ namespace SwagSwap.Repositories
                          FROM Posts p
                               LEFT JOIN Categories c ON p.CategoryId = c.id
                               LEFT JOIN UserProfile u ON p.UserId = u.id
+                         
                          ORDER BY p.PostedDate DESC";
+
                     var reader = cmd.ExecuteReader();
 
                     var posts = new List<Post>();

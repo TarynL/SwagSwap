@@ -15,13 +15,22 @@ const PostList = () => {
     }, []);
 
     return (
-
-        <div className="container m-2 p-2">
-            {posts.map((post) => (
-                <Post post={post} key={post.id} />
-            ))}
-        </div>
+        <>
+            <div >
+                <div className="header text-center m-2 p-2 " background-color="dark" dark expand="md">
+                    <h1>Out With The Old, In With The New...For You</h1>
+                </div>
+                <div className="container">
+                    <div className="row m-5 ">
+                        {posts.map((post) => (
+                            <Post post={post} key={post.id} />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </>
     );
+
 };
 
 export default PostList;
