@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Message from "./Message";
 import { getAllMessagesByPostId } from "../../modules/messageManager";
+import { getPostById } from "../../modules/postManager";
 
 const MessageList = () => {
     const [messages, setMessages] = useState([]);
@@ -10,6 +11,7 @@ const MessageList = () => {
     const getMessages = () => {
         getAllMessagesByPostId(id).then(r => setMessages(r));
     }
+
 
 
     useEffect(() => {

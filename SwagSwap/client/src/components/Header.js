@@ -31,9 +31,7 @@ export default function Header({ isLoggedIn }) {
                                     <NavLink tag={RRNavLink} to="/myPosts">My Posts</NavLink>
                                 </NavItem>
 
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} to="/message">Messages</NavLink>
-                                </NavItem>
+
 
                                 <NavItem>
                                     <a aria-current="page" className="nav-link"
@@ -41,7 +39,7 @@ export default function Header({ isLoggedIn }) {
                                 </NavItem>
                             </>
                         }
-                        {!isLoggedIn &&
+                        {/* {!isLoggedIn &&
                             <>
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/login">Login</NavLink>
@@ -50,7 +48,7 @@ export default function Header({ isLoggedIn }) {
                                     <NavLink tag={RRNavLink} to="/register">Register</NavLink>
                                 </NavItem>
                             </>
-                        }
+                        } */}
                     </Nav>
 
                 </Collapse>

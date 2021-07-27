@@ -39,7 +39,7 @@ namespace SwagSwap.Controllers
         {
             string currentUserProfileId = GetCurrentFirebaseUserProfileId();
 
-            return Ok(_messageRepository.GetAllMessages(currentUserProfileId, id));
+            return Ok(_messageRepository.GetAllMessagesByPostId(currentUserProfileId, id));
         }
         
         //[HttpGet("myMessages/")]
