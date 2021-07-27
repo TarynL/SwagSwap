@@ -15,16 +15,18 @@ code {
 }
 
 
-
+.header{
+  background-color: #F5E4DC;
+  height: 200px;
+  font-size: 100px;
+  justify-self: center;
+  text-align: center;
+}
 .postImage {
   height: 300px;
-  width: 200px;
+  width: 250px;
+  
 }
 
 
 
-/* .modal {
-  position: absolute;
-  top: 0;
-
-} */

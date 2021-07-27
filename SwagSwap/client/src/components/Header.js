@@ -39,16 +39,16 @@ export default function Header({ isLoggedIn }) {
                                 </NavItem>
                             </>
                         }
-                        {/* {!isLoggedIn &&
+                        {!isLoggedIn &&
                             <>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/login">Login</NavLink>
+                                    <NavLink tag={RRNavLink} to="/login"></NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/register">Register</NavLink>
+                                    <NavLink tag={RRNavLink} to="/register"></NavLink>
                                 </NavItem>
                             </>
-                        } */}
+                        }
                     </Nav>
 
                 </Collapse>

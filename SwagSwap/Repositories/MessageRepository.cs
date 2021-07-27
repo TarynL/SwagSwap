@@ -28,12 +28,13 @@ namespace SwagSwap.Repositories
                                    
                             FROM Messages m
                             LEFT JOIN Posts p ON m.PostId = p.id
-                            LEFT JOIN UserProfile u ON m.SenderId  = u.Id or m.RecipientId = u.Id
+                            LEFT JOIN UserProfile u ON m.SenderId = u.Id or m.RecipientId = u.Id
                             WHERE FirebaseUserId = @firebaseUserId  AND m.PostId = @id
                             ORDER BY m.CreateDateTime DESC";
 
                     DbUtils.AddParameter(cmd, "@firebaseUserId", firebaseUserId);
                     DbUtils.AddParameter(cmd, "@id", id);
+
 
                     var reader = cmd.ExecuteReader();
 

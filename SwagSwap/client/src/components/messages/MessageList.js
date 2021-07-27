@@ -11,7 +11,7 @@ const MessageList = () => {
     const getMessages = () => {
         getAllMessagesByPostId(id).then(r => setMessages(r));
     }
-
+    console.log(messages);
 
 
     useEffect(() => {
