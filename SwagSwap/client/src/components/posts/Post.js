@@ -9,18 +9,14 @@ const Post = ({ post }) => {
 
     return (
         <>
-            <Card className="container w-50 m-2 p-2">
+            <Card className="col-xs-1 m-4 p-0">
                 <CardBody className="card-content">
                     <Link to={`/post/${post.id}`}>
                         <img className="postImage" id="modal" src={post.imageUrl} />
                     </Link>
                 </CardBody>
             </Card>
-            {/* <div className="modal">
-                <div className="modal_contents">
-                    {PostDetails()}
-                </div>
-            </div> */}
+
         </>
     );
 };

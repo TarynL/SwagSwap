@@ -38,7 +38,7 @@ export const getAllMessagesByCurrentUser = () => {
     });
 };
 
-export const getMessageById = (id) => {
+export const getAllMessagesByPostId = (id) => {
     return getToken().then((token) => {
 
         return fetch(`${baseUrl}/${id}`, {

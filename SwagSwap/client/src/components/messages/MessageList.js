@@ -1,49 +1,27 @@
 import React, { useEffect, useState } from "react";
-import ReceivedMessage from "./ReceivedMessage";
-import SentMessage from "./SentMessage";
 import { useParams } from "react-router";
-import { getPostById } from "../../modules/postManager";
-import { getAllMessages, getAllMessagesByCurrentUser } from "../../modules/messageManager";
+import Message from "./Message";
+import { getAllMessagesByPostId } from "../../modules/messageManager";
 
 const MessageList = () => {
-    const [sentMessages, setSentMessages] = useState([]);
-    const [receivedMessages, setReceivedMessages] = useState([]);
-    // const [postImage, setPostImage] = useState([]);
-    // const { id } = useParams();
+    const [messages, setMessages] = useState([]);
+    const { id } = useParams();
 
-
-    const getSentMessages = () => {
-        getAllMessagesByCurrentUser().then(s => setSentMessages(s));
-    };
-
-    const getReceivedMessages = () => {
-        getAllMessages().then(r => setReceivedMessages(r));
+    const getMessages = () => {
+        getAllMessagesByPostId(id).then(r => setMessages(r));
     }
-    // const getPostImage = () => {
-    //     getPostById(id)
-    //         .then(setPostImage)
-    // }
 
 
     useEffect(() => {
-        // getPostImage();
-        getSentMessages();
-        getReceivedMessages();
-
+        getMessages();
     }, []);
 
     return (
         <>
             <div className="message-container">
-                {/* <div>{postImage.imageUrl}</div> */}
-                <div className="container m-2 p-2 float-right">
-                    {/* {sentMessages.map((sentMessage) => (
-                        <SentMessage sentMessage={sentMessage} key={sentMessage.id} />
-                    ))} */}
-                </div>
                 <div className="container m-2 p-2 float-left">
-                    {receivedMessages.map((receivedMessage) => (
-                        <ReceivedMessage receivedMessage={receivedMessage} key={receivedMessage.id} />
+                    {messages.map((message) => (
+                        <Message message={message} key={message.id} />
                     ))}
                 </div>
             </div>

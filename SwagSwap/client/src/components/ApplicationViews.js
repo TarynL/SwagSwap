@@ -12,7 +12,7 @@ import MessageList from "./messages/MessageList";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
-        <main>
+        <main className="main" >
             <Switch>
                 <Route path="/" exact>
                     {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
@@ -34,7 +34,7 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <PostDetails /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/messages" exact>
+                <Route path="/message" exact>
                     {isLoggedIn ? <MessageList /> : <Redirect to="/login" />}
                 </Route>
 

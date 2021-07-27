@@ -34,38 +34,38 @@ namespace SwagSwap.Controllers
         }
 
         // GET: api/<MessageController>
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpGet("{id}")]
+        public IActionResult GetAll(int id)
         {
             string currentUserProfileId = GetCurrentFirebaseUserProfileId();
 
-            return Ok(_messageRepository.GetAllMessages(currentUserProfileId));
+            return Ok(_messageRepository.GetAllMessages(currentUserProfileId, id));
         }
         
-        [HttpGet("myMessages/")]
-        public IActionResult GetMessagesByUserId()
-        {
-            string currentUserProfileId = GetCurrentFirebaseUserProfileId();
-            var messages = _messageRepository.GetAllMessagesByFirebaseUserId(currentUserProfileId);
-            if (messages == null)
-            {
-                return NotFound();
-            }
+        //[HttpGet("myMessages/")]
+        //public IActionResult GetMessagesByUserId()
+        //{
+        //    string currentUserProfileId = GetCurrentFirebaseUserProfileId();
+        //    var messages = _messageRepository.GetAllMessagesByFirebaseUserId(currentUserProfileId);
+        //    if (messages == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(messages);
-        }
+        //    return Ok(messages);
+        //}
 
-        // GET api/<MessageController>/5
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var message = _messageRepository.GetById(id);
-            if (message == null)
-            {
-                return NotFound();
-            }
-            return Ok(message);
-        }
+        //// GET api/<MessageController>/5
+        //[HttpGet("{id}")]
+        //public IActionResult GetById(int id)
+        //{
+        //    var message = _messageRepository.GetById(id);
+        //    if (message == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(message);
+        //}
 
       
         [HttpPost]

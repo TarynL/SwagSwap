@@ -38,11 +38,10 @@ const PostDetails = () => {
                     <p><b>Size: </b>{postDetails.size}</p>
                     <p><b>Date Posted: </b>{handleDate()}</p>
                     <p><b>Posted By: </b>{postDetails.userProfile?.displayName}</p>
-                    <button>Message Now</button>
                     <Button className="btn btn-primary" onClick={() => history.push(`/`)}>Go Back</Button>
 
                     <Link to={`/message/add/${postDetails.id}`}>
-                        <Button className="btn btn-success">Message</Button>
+                        <Button className="btn btn-primary">Message</Button>
                     </Link>
                 </CardBody>
             </Card >

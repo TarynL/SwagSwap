@@ -1,22 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody, Button, CardFooter } from "reactstrap";
 
 const MyPost = ({ myPost, handleDelete }) => {
 
     return (
-        <Card className="container w-50 m-2 p-2">
-            <CardBody className="card-content">
-                <img className="postImage" src={myPost.imageUrl} />
-                <Link to={`/post/edit/${myPost.id}`}>
-                    <button className="btn btn-light">Edit</button>
-                </Link>
+        <>
+            <Card className="col-xs-1 m-4 p-0">
+                <CardBody className="card-content">
+                    <img className="postImage" src={myPost.imageUrl} />
 
-                <button className="btn btn-light" onClick={() => handleDelete(myPost.id)}>Delete</button>
+                </CardBody>
+                <CardFooter className="text-center">
+                    <Link to={`/post/edit/${myPost.id}`}>
+                        <Button className="btn btn-light">Edit</Button>
+                    </Link>
+                    <Link>
+                        <Button className="btn btn-light" onClick={() => handleDelete(myPost.id)}>Delete</Button>
+                    </Link>
+                </CardFooter>
+            </Card>
 
-            </CardBody>
-
-        </Card>
+        </>
     );
 };
 
