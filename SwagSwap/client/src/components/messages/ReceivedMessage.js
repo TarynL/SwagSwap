@@ -3,14 +3,16 @@ import { Card, CardBody } from "reactstrap";
 
 
 
-const Message = ({ message }) => {
+const ReceivedMessage = ({ message }) => {
 
     return (
         <>
             <Card className="container w-50 m-2 p-2">
-                <CardBody className="card-content">
+                <CardBody className="card-content float-left">
                     <p >{message?.content}</p>
-                    <p >{message.senderId}</p>
+                    <p >From: {message.userProfile.displayName}</p>
+                    <p >{message?.createDateTime}</p>
+
                 </CardBody>
             </Card>
         </>
@@ -19,4 +21,4 @@ const Message = ({ message }) => {
 
 };
 
-export default Message;
+export default ReceivedMessage;

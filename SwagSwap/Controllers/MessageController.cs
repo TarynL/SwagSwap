@@ -34,26 +34,24 @@ namespace SwagSwap.Controllers
         }
 
         // GET: api/<MessageController>
-        [HttpGet("{id}")]
+        [HttpGet("sent/{id}")]
         public IActionResult GetAll(int id)
         {
-            string currentUserProfileId = GetCurrentFirebaseUserProfileId();
+            var currentUserId = GetCurrentUserProfileId();
 
-            return Ok(_messageRepository.GetAllMessagesByPostId(currentUserProfileId, id));
+            return Ok(_messageRepository.GetAllSenderMessagesByPostId(currentUserId, id));
         }
-        
-        //[HttpGet("myMessages/")]
-        //public IActionResult GetMessagesByUserId()
-        //{
-        //    string currentUserProfileId = GetCurrentFirebaseUserProfileId();
-        //    var messages = _messageRepository.GetAllMessagesByFirebaseUserId(currentUserProfileId);
-        //    if (messages == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    return Ok(messages);
-        //}
+        // GET: api/<MessageController>
+        [HttpGet("received/{id}")]
+        public IActionResult GetAllReceived(int id)
+        {
+            var currentUserId = GetCurrentUserProfileId();
+
+            return Ok(_messageRepository.GetAllReceiverMessagesByPostId(currentUserId, id));
+        }
+
+
 
         //// GET api/<MessageController>/5
         //[HttpGet("{id}")]
@@ -67,7 +65,7 @@ namespace SwagSwap.Controllers
         //    return Ok(message);
         //}
 
-      
+
         [HttpPost]
         public IActionResult CreateMessage(Message message)
         {
@@ -77,6 +75,12 @@ namespace SwagSwap.Controllers
 
             _messageRepository.Add(message);
             return CreatedAtAction(nameof(GetAll), new { id = message.Id }, message);
+        }
+        private int GetCurrentUserProfileId()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            return userProfile.Id;
         }
         private string GetCurrentFirebaseUserProfileId()
         {

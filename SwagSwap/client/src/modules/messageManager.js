@@ -2,10 +2,10 @@ import { getToken } from "./authManager";
 
 const baseUrl = '/api/message';
 
-export const getAllMessages = () => {
+export const getAllSenderMessagesByPostId = (id) => {
     return getToken().then((token) => {
 
-        return fetch(`${baseUrl}`, {
+        return fetch(`${baseUrl}/sent/${id}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -20,10 +20,10 @@ export const getAllMessages = () => {
     });
 };
 
-export const getAllMessagesByCurrentUser = () => {
+export const getAllReceiverMessagesByPostId = (id) => {
     return getToken().then((token) => {
 
-        return fetch(`${baseUrl}/myMessages`, {
+        return fetch(`${baseUrl}/received/${id}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -38,23 +38,6 @@ export const getAllMessagesByCurrentUser = () => {
     });
 };
 
-export const getAllMessagesByPostId = (id) => {
-    return getToken().then((token) => {
-
-        return fetch(`${baseUrl}/${id}`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then(resp => {
-            if (resp.ok) {
-                return resp.json();
-            } else {
-                throw new Error("An unknown error occurred while trying to get message.");
-            }
-        });
-    });
-};
 
 
 export const addMessage = (message) => {

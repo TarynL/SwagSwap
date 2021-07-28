@@ -1,30 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import Message from "./Message";
-import { getAllMessagesByPostId } from "../../modules/messageManager";
+import ReceivedMessage from "./ReceivedMessage";
+import SentMessage from "./SentMessage";
+import { getAllSenderMessagesByPostId, getAllReceiverMessagesByPostId } from "../../modules/messageManager";
 import { getPostById } from "../../modules/postManager";
 
 const MessageList = () => {
-    const [messages, setMessages] = useState([]);
+    const [sentMessages, setSentMessages] = useState([]);
+    const [receivedMessages, setReceivedMessages] = useState([]);
+
     const { id } = useParams();
 
-    const getMessages = () => {
-        getAllMessagesByPostId(id).then(r => setMessages(r));
+    const getSentMessages = () => {
+        getAllSenderMessagesByPostId(id).then(s => setSentMessages(s));
     }
-    console.log(messages);
+
+    const getReceivedMessages = () => {
+        getAllReceiverMessagesByPostId(id).then(r => setReceivedMessages(r));
+    }
 
 
     useEffect(() => {
-        getMessages();
+        getSentMessages();
+        getReceivedMessages();
     }, []);
+
+    let MessageComponents = sentMessages.map((message) => (
+        <SentMessage message={message} key={message.id} />
+    ))
+    MessageComponents = MessageComponents.concat(receivedMessages.map((message) => (
+        <ReceivedMessage message={message} key={message.id} />
+    )))
+
 
     return (
         <>
             <div className="message-container">
-                <div className="container m-2 p-2 float-left">
-                    {messages.map((message) => (
-                        <Message message={message} key={message.id} />
-                    ))}
+                <div className="container m-2 p-2">
+                    {MessageComponents.sort(function (a, b) { return b.key - a.key })}
                 </div>
             </div>
         </>
