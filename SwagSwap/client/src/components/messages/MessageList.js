@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 import ReceivedMessage from "./ReceivedMessage";
 import SentMessage from "./SentMessage";
 import { getAllSenderMessagesByPostId, getAllReceiverMessagesByPostId } from "../../modules/messageManager";
-import { getPostById } from "../../modules/postManager";
 
 const MessageList = () => {
     const [sentMessages, setSentMessages] = useState([]);

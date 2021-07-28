@@ -59,7 +59,7 @@ export const getMessagesByPostId = (id) => {
 
 export const addMessage = (message) => {
     return getToken().then((token) => {
-
+        debugger
         return fetch(`${baseUrl}`, {
             method: "POST",
             headers: {
