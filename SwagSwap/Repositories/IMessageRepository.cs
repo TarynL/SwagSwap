@@ -7,7 +7,7 @@ namespace SwagSwap.Repositories
     {
         public List<Message> GetAllSenderMessagesByPostId(int currentUserId, int id);
         public List<Message> GetAllReceiverMessagesByPostId(int currentUserId, int id);
-      
+        public Message GetByPostId(int id);
         public void Add(Message message);
     }
 }

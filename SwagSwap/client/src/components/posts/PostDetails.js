@@ -40,7 +40,7 @@ const PostDetails = () => {
                     <p><b>Posted By: </b>{postDetails.userProfile?.displayName}</p>
                     <Button className="btn btn-primary" onClick={() => history.push(`/`)}>Go Back</Button>
 
-                    <Link to={`/message/${postDetails.id}`}>
+                    <Link to={`/message/add/${postDetails.id}`}>
                         <Button className="btn btn-primary">Message</Button>
                     </Link>
                 </CardBody>

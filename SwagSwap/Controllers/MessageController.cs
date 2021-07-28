@@ -53,17 +53,16 @@ namespace SwagSwap.Controllers
 
 
 
-        //// GET api/<MessageController>/5
-        //[HttpGet("{id}")]
-        //public IActionResult GetById(int id)
-        //{
-        //    var message = _messageRepository.GetById(id);
-        //    if (message == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(message);
-        //}
+        [HttpGet("PostId")]
+        public IActionResult GetAllByPostId(int id)
+        {
+            var messages = _messageRepository.GetByPostId(id);
+            if (messages == null)
+            {
+                return NotFound();
+            }
+            return Ok(messages);
+        }
 
 
         [HttpPost]
@@ -74,7 +73,7 @@ namespace SwagSwap.Controllers
             message.CreateDateTime = DateTime.Now;
 
             _messageRepository.Add(message);
-            return CreatedAtAction(nameof(GetAll), new { id = message.Id }, message);
+            return CreatedAtAction("GetByPostId", new { id = message.Id }, message);
         }
         private int GetCurrentUserProfileId()
         {
