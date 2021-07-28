@@ -17,7 +17,7 @@ const PostList = () => {
     return (
         <>
             <div >
-                <div className="header text-center m-2 p-2 " background-color="dark" dark expand="md">
+                <div className="header m-2 p-2 ">
                     <h1>Out With The Old, In With The New...For You</h1>
                 </div>
                 <div className="container">

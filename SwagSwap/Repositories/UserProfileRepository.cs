@@ -59,16 +59,16 @@ namespace SwagSwap.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, ImageUrl as ProfileImage,
+                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, ImageUrl,
                                                                  Email, UserZip, Rating)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, @PostImage,
+                                        VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, @ImageUrl,
                                                 @Email, @UserZip, @Rating)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
                     DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
-                    DbUtils.AddParameter(cmd, "@ProfileImage", userProfile.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@ImageUrl", userProfile.ImageUrl);
                     DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
                     DbUtils.AddParameter(cmd, "@UserZip", userProfile.UserZip);
                     DbUtils.AddParameter(cmd, "@Rating", userProfile.Rating);

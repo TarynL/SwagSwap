@@ -9,6 +9,8 @@ namespace SwagSwap.Repositories
         void Delete(int id);
 
         void UpdatePost(Post post);
+        List<Post> GetAllPostsNotFromUser(int currentUserId);
+
         List<Post> GetAllPosts();
         Post GetPostById(int id);
 
