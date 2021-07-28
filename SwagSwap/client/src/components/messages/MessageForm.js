@@ -6,17 +6,14 @@ import { getPostById } from '../../modules/postManager';
 
 const MessageForm = () => {
     const { id } = useParams();
-    const [postDetails, setPostDetails] = useState({});
-
-
-
 
     const emptyMessage = {
         content: '',
-        receipentId: 0,
+        recipientId: 0,
         postId: id
     };
 
+    const [postDetails, setPostDetails] = useState({});
     const [newMessage, setNewMessage] = useState(emptyMessage);
     const history = useHistory();
 
@@ -33,7 +30,8 @@ const MessageForm = () => {
 
         messageCopy[key] = value;
         messageCopy.postId = id;
-
+        messageCopy.recipientId = postDetails.userId;
+        console.log(messageCopy);
         setNewMessage(messageCopy);
 
     };
@@ -49,20 +47,19 @@ const MessageForm = () => {
 
     useEffect(() => {
         getPostDetails()
-        console.log(getPostDetails())
     }, []);
 
 
     return (
         <Form>
-            <h2>New Message to</h2>
+            <h2>New Message </h2>
             <FormGroup>
                 <Label for="content">Content</Label>
                 <Input type="text" name="content" id="content" placeholder="Message Here"
-                    value={newMessage.cpontent}
+                    value={newMessage.content}
                     onChange={handleInputChange} />
             </FormGroup>
-            <Input type="hidden" name="recipientId" value={postDetails.userId} />
+            {/* <Input type="hidden" name="recipientId" value={postDetails.userId} /> */}
 
             <Button className="btn btn-primary" onClick={handleSave}>Send</Button>
             <Button className="btn btn-primary" onClick={() => history.push(`/`)}>Cancel</Button>

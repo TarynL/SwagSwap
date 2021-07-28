@@ -54,7 +54,7 @@ namespace SwagSwap.Controllers
 
 
         [HttpGet("PostId")]
-        public IActionResult GetAllByPostId(int id)
+        public IActionResult GetByPostId(int id)
         {
             var messages = _messageRepository.GetByPostId(id);
             if (messages == null)
