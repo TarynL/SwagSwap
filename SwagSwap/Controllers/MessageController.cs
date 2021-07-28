@@ -68,6 +68,7 @@ namespace SwagSwap.Controllers
         [HttpPost]
         public IActionResult CreateMessage(Message message)
         {
+          
             var currentUserProfile = GetCurrentUserProfile();
             message.SenderId = currentUserProfile.Id;
             message.CreateDateTime = DateTime.Now;

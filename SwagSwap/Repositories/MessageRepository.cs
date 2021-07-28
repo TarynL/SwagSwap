@@ -197,7 +197,7 @@ namespace SwagSwap.Repositories
                             LEFT JOIN UserProfile u ON m.RecipientId = u.Id
                             LEFT JOIN Posts p ON m.PostId = p.id
                             LEFT JOIN Categories c ON p.CategoryId = c.id
-                            WHERE m.PostId = @id
+                            WHERE m.PostId = @id AND m.RecipientId = p.UserId
                             ORDER BY m.CreateDateTime DESC
                              ";
 
@@ -268,7 +268,7 @@ namespace SwagSwap.Repositories
                         OUTPUT INSERTED.ID
                         VALUES (
                             @SenderId, @RecipientId, @PostId, @Content, @CreateDateTime)";
-
+                  
                     DbUtils.AddParameter(cmd, "@SenderId", message.SenderId);
                     DbUtils.AddParameter(cmd, "@RecipientId", message.RecipientId);
                     DbUtils.AddParameter(cmd, "@PostId", message.PostId);
@@ -276,6 +276,7 @@ namespace SwagSwap.Repositories
                     DbUtils.AddParameter(cmd, "@CreateDateTime", message.CreateDateTime);
 
 
+                    
                     message.Id = (int)cmd.ExecuteScalar();
                 }
             }
