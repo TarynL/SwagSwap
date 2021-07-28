@@ -9,6 +9,7 @@ import MyPostForm from "./myPosts/myPostForm";
 import MyPostEdit from "./myPosts/myPostEdit";
 import PostDetails from "./posts/PostDetails";
 import MessageList from "./messages/MessageList";
+import MessageForm from "./messages/MessageForm";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -36,6 +37,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/message/:id" exact>
                     {isLoggedIn ? <MessageList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/message/add/:id" exact>
+                    {isLoggedIn ? <MessageForm /> : <Redirect to="/login" />}
                 </Route>
 
 

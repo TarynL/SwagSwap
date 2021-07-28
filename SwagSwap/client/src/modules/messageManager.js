@@ -2,10 +2,10 @@ import { getToken } from "./authManager";
 
 const baseUrl = '/api/message';
 
-export const getAllMessages = () => {
+export const getAllSenderMessagesByPostId = (id) => {
     return getToken().then((token) => {
 
-        return fetch(`${baseUrl}`, {
+        return fetch(`${baseUrl}/sent/${id}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -20,10 +20,10 @@ export const getAllMessages = () => {
     });
 };
 
-export const getAllMessagesByCurrentUser = () => {
+export const getAllReceiverMessagesByPostId = (id) => {
     return getToken().then((token) => {
 
-        return fetch(`${baseUrl}/myMessages`, {
+        return fetch(`${baseUrl}/received/${id}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -38,10 +38,10 @@ export const getAllMessagesByCurrentUser = () => {
     });
 };
 
-export const getAllMessagesByPostId = (id) => {
+export const getMessagesByPostId = (id) => {
     return getToken().then((token) => {
 
-        return fetch(`${baseUrl}/${id}`, {
+        return fetch(`${baseUrl}/PostId?id=${id}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -50,7 +50,7 @@ export const getAllMessagesByPostId = (id) => {
             if (resp.ok) {
                 return resp.json();
             } else {
-                throw new Error("An unknown error occurred while trying to get message.");
+                throw new Error("An unknown error occurred while trying to get comments.");
             }
         });
     });
@@ -59,7 +59,7 @@ export const getAllMessagesByPostId = (id) => {
 
 export const addMessage = (message) => {
     return getToken().then((token) => {
-
+        debugger
         return fetch(`${baseUrl}`, {
             method: "POST",
             headers: {

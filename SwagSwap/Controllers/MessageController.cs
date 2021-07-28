@@ -34,49 +34,53 @@ namespace SwagSwap.Controllers
         }
 
         // GET: api/<MessageController>
-        [HttpGet("{id}")]
+        [HttpGet("sent/{id}")]
         public IActionResult GetAll(int id)
         {
-            string currentUserProfileId = GetCurrentFirebaseUserProfileId();
+            var currentUserId = GetCurrentUserProfileId();
 
-            return Ok(_messageRepository.GetAllMessagesByPostId(currentUserProfileId, id));
+            return Ok(_messageRepository.GetAllSenderMessagesByPostId(currentUserId, id));
         }
-        
-        //[HttpGet("myMessages/")]
-        //public IActionResult GetMessagesByUserId()
-        //{
-        //    string currentUserProfileId = GetCurrentFirebaseUserProfileId();
-        //    var messages = _messageRepository.GetAllMessagesByFirebaseUserId(currentUserProfileId);
-        //    if (messages == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    return Ok(messages);
-        //}
+        // GET: api/<MessageController>
+        [HttpGet("received/{id}")]
+        public IActionResult GetAllReceived(int id)
+        {
+            var currentUserId = GetCurrentUserProfileId();
 
-        //// GET api/<MessageController>/5
-        //[HttpGet("{id}")]
-        //public IActionResult GetById(int id)
-        //{
-        //    var message = _messageRepository.GetById(id);
-        //    if (message == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(message);
-        //}
+            return Ok(_messageRepository.GetAllReceiverMessagesByPostId(currentUserId, id));
+        }
 
-      
+
+
+        [HttpGet("PostId")]
+        public IActionResult GetByPostId(int id)
+        {
+            var messages = _messageRepository.GetByPostId(id);
+            if (messages == null)
+            {
+                return NotFound();
+            }
+            return Ok(messages);
+        }
+
+
         [HttpPost]
         public IActionResult CreateMessage(Message message)
         {
+          
             var currentUserProfile = GetCurrentUserProfile();
             message.SenderId = currentUserProfile.Id;
             message.CreateDateTime = DateTime.Now;
 
             _messageRepository.Add(message);
-            return CreatedAtAction(nameof(GetAll), new { id = message.Id }, message);
+            return CreatedAtAction("GetByPostId", new { id = message.Id }, message);
+        }
+        private int GetCurrentUserProfileId()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            return userProfile.Id;
         }
         private string GetCurrentFirebaseUserProfileId()
         {

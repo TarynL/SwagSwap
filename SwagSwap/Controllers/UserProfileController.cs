@@ -11,8 +11,9 @@ using System.Threading.Tasks;
 
 namespace SwagSwap.Controllers
 {
-  
+
     [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class UserProfileController : ControllerBase

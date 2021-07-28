@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 namespace SwagSwap.Controllers
 {
     [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class PostController : ControllerBase
@@ -29,7 +30,20 @@ namespace SwagSwap.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
+
             return Ok(_postRepository.GetAllPosts());
+        }
+        [HttpGet("others/")]
+        public IActionResult GetPostsNotByUser()
+        {
+            int currentUserProfileId = GetCurrentUserProfileId();
+            var posts = _postRepository.GetAllPostsNotFromUser(currentUserProfileId);
+            if (posts == null)
+            {
+                return NotFound();
+            }
+            return Ok(posts);
+
         }
 
         // GET api/<PostController>/5
@@ -101,7 +115,13 @@ namespace SwagSwap.Controllers
             _postRepository.Delete(id);
             return NoContent();
         }
-
+        private int GetCurrentUserProfileId()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            return userProfile.Id;
+        }
+      
         private string GetCurrentFirebaseUserProfileId()
         {
             string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
