@@ -72,6 +72,15 @@ code {
   margin-left: 5%;
 }
 
+.convoList{
+  margin-top: 11rem;
+}
+.convoListCard{
+  margin-bottom: 2rem;
+  font-size: large;
+  border: solid #9EC4C5 5px;
+}
+
 /* .RmessageCurl{
   width:10px;
   height:10px;

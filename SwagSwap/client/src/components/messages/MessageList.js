@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ReceivedMessage from "./ReceivedMessage";
 import SentMessage from "./SentMessage";
+import { Card, CardBody } from "reactstrap";
 import { getAllSenderMessagesByPostId, getAllReceiverMessagesByPostId } from "../../modules/messageManager";
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, CardHeader } from 'reactstrap';
 import { addMessage } from '../../modules/messageManager';
 import { getPostById } from '../../modules/postManager';
 
@@ -11,7 +12,7 @@ import { getPostById } from '../../modules/postManager';
 const MessageList = () => {
     const [sentMessages, setSentMessages] = useState([]);
     const [receivedMessages, setReceivedMessages] = useState([]);
-    const [convos, setConvos] = useState([]);
+    const [convos, setConvos] = useState();
 
     const { id } = useParams();
 
@@ -21,6 +22,7 @@ const MessageList = () => {
 
     const getReceivedMessages = () => {
         getAllReceiverMessagesByPostId(id).then(r => setReceivedMessages(r));
+
     }
 
     const emptyMessage = {
@@ -62,47 +64,87 @@ const MessageList = () => {
     };
 
 
+    const getMessages = () => {
+        let MessageComponents = sentMessages.map((message) => (
+            <SentMessage message={message} key={message.id} />
+        ))
+        MessageComponents = MessageComponents.concat(receivedMessages.map((message) => (
+            <ReceivedMessage message={message} key={message.id} />
+        )))
+        setConvos(MessageComponents)
+    }
 
 
+
+    let convosNames = receivedMessages?.map(message => message.userProfile)
+    let uniqueNames = new Set();
+
+    const filtered = convosNames.filter(e => {
+        const duplicate = uniqueNames.has(e.id);
+        uniqueNames.add(e.id);
+        return !duplicate;
+    })
+
+    const handleOnClick = (e) => {
+        e.preventDefault()
+        let MessageComponents = receivedMessages.filter(s => s.senderId == e.target.value).map((message) => (
+            <ReceivedMessage message={message} key={message.id} />))
+        MessageComponents = MessageComponents.concat(sentMessages.filter(s => s.recipientId == e.target.value).map((message) => (
+            <SentMessage message={message} key={message.id} />
+        )))
+        setConvos(MessageComponents)
+    }
 
     useEffect(() => {
         getSentMessages();
         getReceivedMessages();
         getPostDetails();
+        getMessages();
     }, []);
-
-    let MessageComponents = sentMessages.map((message) => (
-        <SentMessage message={message} key={message.id} />
-    ))
-    MessageComponents = MessageComponents.concat(receivedMessages.map((message) => (
-        <ReceivedMessage message={message} key={message.id} />
-    )))
 
 
 
     return (
         <>
-            <Button className="btn btn-primary goBack" onClick={() => history.push(`/`)}>Go Back</Button>
+            <div className="container">
+                <div className="row">
+                    <div className="col convoList">
+                        {filtered.map((m) => {
+                            return (<Card className="convoListCard w-75">
+                                <CardHeader>Conversation With</CardHeader>
+                                <CardBody>
+                                    <Button className="text-center" value={m.id} onClick={handleOnClick}> {m.displayName}</Button>
 
-            <div className="message-container">
-                <div className="chat-input">
-                    <Form>
-                        <FormGroup>
-                            <Input type="text" name="content" id="content" placeholder="Message Here"
-                                value={newMessage.content}
-                                onChange={handleInputChange} />
+                                </CardBody>
+                            </Card>
+                            )
+                        })}
 
-                        </FormGroup>
-                        <Button className="btn btn-primary float-right" onClick={handleSave}>Send</Button>
+                    </div>
+                    <div className="col">
+
+                        <Button className="btn btn-primary goBack" onClick={() => history.push(`/myposts`)}>Go Back</Button>
+
+                        <div className="message-container">
+                            <div className="chat-input">
+                                <Form>
+                                    <FormGroup>
+                                        <Input type="text" name="content" id="content" placeholder="Message Here"
+                                            value={newMessage.content}
+                                            onChange={handleInputChange} />
+
+                                    </FormGroup>
+                                    <Button className="btn btn-primary float-right" onClick={handleSave}>Send</Button>
 
 
-                    </Form>
+                                </Form>
+                            </div>
+                            <div className="container m-2 p-2">
+                                {convos?.sort(function (a, b) { return b.key - a.key })}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="container m-2 p-2">
-                    {MessageComponents.sort(function (a, b) { return b.key - a.key })}
-                </div>
-
-
             </div>
         </>
     );
