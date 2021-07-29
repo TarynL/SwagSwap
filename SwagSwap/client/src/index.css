@@ -28,6 +28,11 @@ code {
   
 }
 
+.nav-logo{
+  height: 50px;
+  width: 50px;
+}
+
 .received {
   background-color: #F2C2C2;
 }

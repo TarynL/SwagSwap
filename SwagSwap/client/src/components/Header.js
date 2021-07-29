@@ -18,7 +18,7 @@ export default function Header({ isLoggedIn }) {
     return (
         <div >
             <Navbar color="dark" dark expand="md">
-                <NavbarBrand tag={RRNavLink} to="/"><img style={{ height: 50, width: 50 }} src="Swag.png" /></NavbarBrand>
+                <NavbarBrand tag={RRNavLink} to="/"><img className="nav-logo" src="Swag.png" /></NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>

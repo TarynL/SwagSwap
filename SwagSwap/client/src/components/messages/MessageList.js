@@ -11,6 +11,7 @@ import { getPostById } from '../../modules/postManager';
 const MessageList = () => {
     const [sentMessages, setSentMessages] = useState([]);
     const [receivedMessages, setReceivedMessages] = useState([]);
+    const [convos, setConvos] = useState([]);
 
     const { id } = useParams();
 
@@ -76,6 +77,7 @@ const MessageList = () => {
     MessageComponents = MessageComponents.concat(receivedMessages.map((message) => (
         <ReceivedMessage message={message} key={message.id} />
     )))
+
 
 
     return (
