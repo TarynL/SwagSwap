@@ -39,9 +39,9 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <MessageList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/message/add/:id" exact>
+                {/* <Route path="/message/add/:id" exact>
                     {isLoggedIn ? <MessageForm /> : <Redirect to="/login" />}
-                </Route>
+                </Route> */}
 
 
                 <Route path="/login">

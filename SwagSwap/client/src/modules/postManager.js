@@ -122,7 +122,7 @@ export const getPostsByCategoryId = (id) => {
             if (resp.ok) {
                 return resp.json();
             } else {
-                throw new Error("An unknown error occurred while trying to get post details.");
+                throw new Error("An unknown error occurred while trying to get post by categoryId.");
             }
         });
     });

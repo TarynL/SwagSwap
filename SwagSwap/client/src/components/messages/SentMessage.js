@@ -12,15 +12,23 @@ const SentMessage = ({ message }) => {
 
     return (
         <>
-            <Card className="container w-50 m-2 p-2">
-                <CardBody className="card-content float-right">
-                    <p >{message?.content}</p>
-                    <p >To: {message.userProfile.displayName}</p>
-                    <p >Date: {handleDate()}</p>
+            <div className="messageCard">
+
+                <Card className="container Smessage">
+                    <CardBody className="card-content  sent">
+                        <p >{message?.content}</p>
+                        <p >To: {message.userProfile.displayName}</p>
+                        <p >Date: {handleDate()}</p>
 
 
-                </CardBody>
-            </Card>
+                    </CardBody>
+                </Card>
+                <div className="messageCurlHolder">
+                    <div className="messageCurl"></div>
+                    <div className="messageCurlCover"></div>
+                </div>
+            </div>
+
         </>
     );
 

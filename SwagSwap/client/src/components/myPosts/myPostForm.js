@@ -53,7 +53,7 @@ const MyPostForm = () => {
 
 
     return (
-        <Form>
+        <Form className="container w-25 text-center">
             <h2>New Post</h2>
             <FormGroup>
                 <Label for="title">Title</Label>

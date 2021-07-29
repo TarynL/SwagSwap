@@ -55,7 +55,7 @@ const MyPostEdit = () => {
     }, [])
 
     return (
-        <Form>
+        <Form className="container w-25 text-center">
             <h2>Edit Post</h2>
             <FormGroup>
                 <Label for="title">Title</Label>
@@ -65,9 +65,10 @@ const MyPostEdit = () => {
             </FormGroup>
             <FormGroup>
                 <Label for="description">Description</Label>
-                <Input type="text" name="description" id="description" placeholder="description"
+                <textarea type="text" name="description" id="description" placeholder="description"
                     value={editPost.description}
-                    onChange={handleInputChange} />
+                    onChange={handleInputChange}
+                    rows="5" cols="60" />
             </FormGroup>
             <FormGroup>
                 <Label for="value">Value</Label>

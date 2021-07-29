@@ -20,7 +20,7 @@ export default function Login() {
         <>
             <div className="container w-75 text-center">
                 <div  >
-                    <img style={{ height: 150, width: 150 }} src="Swag.png" />
+                    <img style={{ height: 150, width: 150 }} src=".../images/Swag.png" />
                 </div>
                 <div  >
                     <img src="groupshot.png" />
