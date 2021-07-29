@@ -44,7 +44,7 @@ namespace SwagSwap.Controllers
 
         // GET: api/<MessageController>
         [HttpGet("received/{id}")]
-        public IActionResult GetAllReceived(int id)
+        public IActionResult GetAllReceived(int id, int senderId)
         {
             var currentUserId = GetCurrentUserProfileId();
 

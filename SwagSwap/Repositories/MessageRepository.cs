@@ -29,7 +29,7 @@ namespace SwagSwap.Repositories
                             FROM Messages m
                             LEFT JOIN Posts p ON m.PostId = p.id
                             LEFT JOIN UserProfile u ON m.RecipientId = u.Id 
-                            WHERE m.PostId = @id and m.SenderId = @currentUserId
+                            WHERE m.PostId = @id and m.SenderId = @currentUserId 
                             ORDER BY m.CreateDateTime DESC";
 
                     DbUtils.AddParameter(cmd, "@currentUserId", currentUserId);
@@ -111,7 +111,7 @@ namespace SwagSwap.Repositories
                             FROM Messages m
                             LEFT JOIN Posts p ON m.PostId = p.id
                             LEFT JOIN UserProfile u ON m.SenderId = u.Id 
-                            WHERE m.PostId = @id AND m.RecipientId = @currentUserId
+                            WHERE m.PostId = @id AND m.RecipientId = @currentUserId 
                             ORDER BY m.CreateDateTime DESC";
 
                     DbUtils.AddParameter(cmd, "@currentUserId", currentUserId);
@@ -255,6 +255,8 @@ namespace SwagSwap.Repositories
                 }
             }
         }
+
+
         public void Add(Message message)
         {
             using (var conn = Connection)

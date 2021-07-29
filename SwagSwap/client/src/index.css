@@ -28,6 +28,11 @@ code {
   
 }
 
+.nav-logo{
+  height: 50px;
+  width: 50px;
+}
+
 .received {
   background-color: #F2C2C2;
 }
@@ -65,6 +70,15 @@ code {
 
 .messageCurlHolder{
   margin-left: 5%;
+}
+
+.convoList{
+  margin-top: 11rem;
+}
+.convoListCard{
+  margin-bottom: 2rem;
+  font-size: large;
+  border: solid #9EC4C5 5px;
 }
 
 /* .RmessageCurl{
