@@ -71,8 +71,18 @@ namespace SwagSwap.Controllers
 
             return Ok(posts);
         }
+        [HttpGet("filter/{id}")]
+        public IActionResult GetPostByCategory(int id)
+        {
+            var post = _postRepository.GetAllPostsByCategory(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return Ok(post);
+        }
 
-       
+
         [HttpPost]
         public IActionResult CreatePost(Post post)
         {

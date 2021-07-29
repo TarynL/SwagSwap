@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SwagSwap.Repositories
 {
-    public class PostRepository: BaseRepository, IPostRepository
+    public class PostRepository : BaseRepository, IPostRepository
     {
         public PostRepository(IConfiguration config) : base(config) { }
 
@@ -283,6 +283,49 @@ namespace SwagSwap.Repositories
             };
         }
 
-       
+        public List<Post> GetAllPostsByCategory(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            SELECT p.Id, p.UserId, p.Title, p.Description,  p.Value, 
+                              p.ImageUrl AS PostImage,
+                              p.PostedDate,
+                              p.CategoryId,  p.Size, c.Id as CategoryId,
+                              c.[Name] AS CategoryName, u.Id as UserProfileId, u.FirebaseUserId,
+                              u.FirstName, u.LastName, u.DisplayName, 
+                              u.ImageUrl AS ProfileImage, u.Email, u.UserZip,                               
+                              u.Rating
+                         FROM Posts p
+                              LEFT JOIN Categories c ON p.CategoryId = c.id
+                              LEFT JOIN UserProfile u ON p.UserId = u.id
+                         WHERE p.CategoryId = @id
+                         ORDER BY p.PostedDate DESC";
+                    DbUtils.AddParameter(cmd, "@id", id);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var posts = new List<Post>();
+
+                    while (reader.Read())
+                    {
+                        posts.Add(NewPostFromReader(reader));
+
+                    }
+
+                    reader.Close();
+
+                    return posts;
+                }
+            }
+        }
+
     }
+
+
+
 }
+

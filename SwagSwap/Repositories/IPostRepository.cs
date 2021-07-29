@@ -15,5 +15,6 @@ namespace SwagSwap.Repositories
         Post GetPostById(int id);
 
         List<Post> GetAllPostsFromUser(string firebaseUserId);
+        public List<Post> GetAllPostsByCategory(int id);
     }
 }

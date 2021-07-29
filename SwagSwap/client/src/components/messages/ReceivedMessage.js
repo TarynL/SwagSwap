@@ -11,14 +11,20 @@ const ReceivedMessage = ({ message }) => {
     };
     return (
         <>
-            <Card className="container w-50 m-2 p-2">
-                <CardBody className="card-content float-left">
-                    <p >{message?.content}</p>
-                    <p >From: {message.userProfile.displayName}</p>
-                    <p >Date: {handleDate()}</p>
+            <div className="messageCard">
+                <Card className="container  Rmessage">
+                    <CardBody className="card-content received">
+                        <p >{message?.content}</p>
+                        <p >From: {message.userProfile.displayName}</p>
+                        <p >Date: {handleDate()}</p>
 
-                </CardBody>
-            </Card>
+                    </CardBody>
+                </Card>
+                <div className="messageCurlHolder">
+                    <div className="RmessageCurl"></div>
+                    <div className="messageCurlCover"></div>
+                </div>
+            </div>
         </>
     );
 
