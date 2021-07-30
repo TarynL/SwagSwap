@@ -28,6 +28,12 @@ code {
   
 }
 
+.postImageForMessage {
+  height: 400px;
+  width: 350px;
+  justify-content: center;
+}
+
 .nav-logo{
   height: 50px;
   width: 50px;
@@ -53,7 +59,7 @@ code {
   background-color:#F2C2C2;
   width:400px;
   padding:10px;
-  border-radius:10px;
+  border-radius:15px;
   border-bottom-left-radius:0px;
   margin-top: 1%;
 }
@@ -63,8 +69,8 @@ code {
   background-color:#9EC4C5;
   width:400px;
   padding:10px;
-  border-radius:10px;
-  border-bottom-left-radius:0px;
+  border-radius:15px;
+  border-bottom-right-radius:0px;
   margin-top: 1%;
 }
 
@@ -81,7 +87,13 @@ code {
   border: solid #9EC4C5 5px;
 }
 
-/* .RmessageCurl{
+.convo-cards {
+ 
+  height: 675px;
+  overflow: scroll;
+}
+/* 
+.messageCurl{
   width:10px;
   height:10px;
   background-color:#F2C2C2;

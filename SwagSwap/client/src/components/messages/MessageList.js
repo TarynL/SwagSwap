@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ReceivedMessage from "./ReceivedMessage";
 import SentMessage from "./SentMessage";
-import { Card, CardBody } from "reactstrap";
-import { getAllSenderMessagesByPostId, getAllReceiverMessagesByPostId } from "../../modules/messageManager";
+import { getAllSenderMessagesByPostId, getAllReceiverMessagesByPostId, getMessagesByPostId } from "../../modules/messageManager";
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Form, FormGroup, Label, Input, CardHeader } from 'reactstrap';
+import { Button, Form, FormGroup, Input } from 'reactstrap';
 import { addMessage } from '../../modules/messageManager';
 import { getPostById } from '../../modules/postManager';
 
@@ -13,7 +12,6 @@ const MessageList = () => {
     const [sentMessages, setSentMessages] = useState([]);
     const [receivedMessages, setReceivedMessages] = useState([]);
     const [convos, setConvos] = useState();
-
     const { id } = useParams();
 
     const getSentMessages = () => {
@@ -50,25 +48,27 @@ const MessageList = () => {
         messageCopy.postId = id;
         messageCopy.recipientId = postDetails.userId;
         console.log(messageCopy);
-        setNewMessage(messageCopy);
+        setNewMessage(messageCopy)
 
     };
 
     const handleSave = (evt) => {
         evt.preventDefault();
+        addMessage(newMessage)
+            .then(() => {
+                setNewMessage(emptyMessage)
+                getSentMessages()
+            })
 
-        addMessage(newMessage).then((m) => {
-            history.push("/");
-        });
 
     };
 
 
-    const getMessages = () => {
-        let MessageComponents = sentMessages.map((message) => (
+    const getMessages = (sent, received) => {
+        let MessageComponents = sent.map((message) => (
             <SentMessage message={message} key={message.id} />
         ))
-        MessageComponents = MessageComponents.concat(receivedMessages.map((message) => (
+        MessageComponents = MessageComponents.concat(received.map((message) => (
             <ReceivedMessage message={message} key={message.id} />
         )))
         setConvos(MessageComponents)
@@ -76,31 +76,15 @@ const MessageList = () => {
 
 
 
-    let convosNames = receivedMessages?.map(message => message.userProfile)
-    let uniqueNames = new Set();
-
-    const filtered = convosNames.filter(e => {
-        const duplicate = uniqueNames.has(e.id);
-        uniqueNames.add(e.id);
-        return !duplicate;
-    })
-
-    const handleOnClick = (e) => {
-        e.preventDefault()
-        let MessageComponents = receivedMessages.filter(s => s.senderId == e.target.value).map((message) => (
-            <ReceivedMessage message={message} key={message.id} />))
-        MessageComponents = MessageComponents.concat(sentMessages.filter(s => s.recipientId == e.target.value).map((message) => (
-            <SentMessage message={message} key={message.id} />
-        )))
-        setConvos(MessageComponents)
-    }
-
     useEffect(() => {
         getSentMessages();
         getReceivedMessages();
         getPostDetails();
-        getMessages();
     }, []);
+
+    useEffect(() => {
+        getMessages(sentMessages, receivedMessages);
+    }, [sentMessages, receivedMessages])
 
 
 
@@ -109,21 +93,11 @@ const MessageList = () => {
             <div className="container">
                 <div className="row">
                     <div className="col convoList">
-                        {filtered.map((m) => {
-                            return (<Card className="convoListCard w-75">
-                                <CardHeader>Conversation With</CardHeader>
-                                <CardBody>
-                                    <Button className="text-center" value={m.id} onClick={handleOnClick}> {m.displayName}</Button>
-
-                                </CardBody>
-                            </Card>
-                            )
-                        })}
-
+                        <img className="postImageForMessage" src={postDetails.imageUrl} />
                     </div>
                     <div className="col">
 
-                        <Button className="btn btn-primary goBack" onClick={() => history.push(`/myposts`)}>Go Back</Button>
+                        <Button className="btn btn-primary goBack" onClick={() => history.push(`/`)}>Go Back</Button>
 
                         <div className="message-container">
                             <div className="chat-input">
@@ -139,7 +113,7 @@ const MessageList = () => {
 
                                 </Form>
                             </div>
-                            <div className="container m-2 p-2">
+                            <div className="container m-2 p-2 convo-cards">
                                 {convos?.sort(function (a, b) { return b.key - a.key })}
                             </div>
                         </div>
