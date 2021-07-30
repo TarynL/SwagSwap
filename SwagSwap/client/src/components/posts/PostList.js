@@ -7,28 +7,10 @@ import { getAllCategories } from "../../modules/categoryManager";
 
 const PostList = () => {
     const [posts, setPosts] = useState([]);
-    // const [categories, setCategories] = useState([]);
 
     const getPosts = () => {
         getAllPosts().then(p => setPosts(p));
     };
-
-    // const handleInputChange = (e) => {
-    //     const newCategory = { ...categories }
-    //     let selectedVal = e.target.value
-    //     newCategory[e.target.id] = selectedVal
-    //     setCategories(newCategory)
-    // }
-
-    // const filterPosts = (id) => {
-    //     getAllCategories()
-    //         .then(c => c.Id === id)
-    //         .then(getPostsByCategoryId(id)
-    //             .then(res => {
-    //                 setPosts(res)
-    //             }))
-
-    // }
 
 
     useEffect(() => {

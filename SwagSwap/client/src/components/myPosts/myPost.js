@@ -18,7 +18,7 @@ const MyPost = ({ myPost, handleDelete }) => {
                     <Link>
                         <Button className="btn btn-light" onClick={() => handleDelete(myPost.id)}>Delete</Button>
                     </Link>
-                    <Link to={`/message/${myPost.id}`}>
+                    <Link to={`/messages/${myPost.id}`}>
                         <Button className="btn btn-light">Messages</Button>
                     </Link>
                 </CardFooter>

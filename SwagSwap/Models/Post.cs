@@ -38,6 +38,9 @@ namespace SwagSwap.Models
 
         public string Size { get; set; }
 
+        public bool IsDeleted { get; set; }
+
+
 
     }
 }
