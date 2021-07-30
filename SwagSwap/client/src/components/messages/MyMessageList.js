@@ -9,12 +9,11 @@ import { addMessage } from '../../modules/messageManager';
 import { getPostById } from '../../modules/postManager';
 
 
-const MessageList = () => {
+const MyMessageList = () => {
     const [sentMessages, setSentMessages] = useState([]);
     const [receivedMessages, setReceivedMessages] = useState([]);
     const [convos, setConvos] = useState();
     const [recipients, setRecipients] = useState();
-
     const { id } = useParams();
 
     const getSentMessages = () => {
@@ -60,7 +59,7 @@ const MessageList = () => {
         addMessage(newMessage)
             .then(() => {
                 setNewMessage(emptyMessage)
-                getMessages()
+                getSentMessages()
             })
 
 
@@ -72,7 +71,7 @@ const MessageList = () => {
         let MessageComponents = sent.map((message) => (
             <SentMessage message={message} key={message.id} />
         ))
-        MessageComponents = MessageComponents.concat(receivedMessages.map((message) => (
+        MessageComponents = MessageComponents.concat(received.map((message) => (
             <ReceivedMessage message={message} key={message.id} />
         )))
         setConvos(MessageComponents)
@@ -151,7 +150,7 @@ const MessageList = () => {
                                     </FormGroup>
                                     <Button disabled={recipients ? false : true} className="btn btn-primary float-right" onClick={handleSave}>Send</Button>
 
-                                    <div className="container m-2 p-2">
+                                    <div className="container m-2 p-2 convo-cards">
                                         {convos?.sort(function (a, b) { return b.key - a.key })}
                                     </div>
                                 </Form>
@@ -165,4 +164,4 @@ const MessageList = () => {
     );
 };
 
-export default MessageList;
+export default MyMessageList;

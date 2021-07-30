@@ -12,7 +12,6 @@ const MessageList = () => {
     const [sentMessages, setSentMessages] = useState([]);
     const [receivedMessages, setReceivedMessages] = useState([]);
     const [convos, setConvos] = useState();
-    const [isLoading, setIsLoading] = useState(false);
     const { id } = useParams();
 
     const getSentMessages = () => {
@@ -94,7 +93,7 @@ const MessageList = () => {
             <div className="container">
                 <div className="row">
                     <div className="col convoList">
-
+                        <img className="postImageForMessage" src={postDetails.imageUrl} />
                     </div>
                     <div className="col">
 
@@ -114,7 +113,7 @@ const MessageList = () => {
 
                                 </Form>
                             </div>
-                            <div className="container m-2 p-2">
+                            <div className="container m-2 p-2 convo-cards">
                                 {convos?.sort(function (a, b) { return b.key - a.key })}
                             </div>
                         </div>

@@ -23,7 +23,7 @@ namespace SwagSwap.Repositories
                     cmd.CommandText = @"
                             SELECT p.Id, p.UserId, p.Title, p.Description,  p.Value, 
                               p.ImageUrl AS PostImage,
-                              p.PostedDate,
+                              p.PostedDate, p.IsDeleted,
                               p.CategoryId,  p.Size, c.Id as CategoryId,
                               c.[Name] AS CategoryName, u.Id as UserProfileId, u.FirebaseUserId,
                               u.FirstName, u.LastName, u.DisplayName, 
@@ -32,6 +32,7 @@ namespace SwagSwap.Repositories
                          FROM Posts p
                               LEFT JOIN Categories c ON p.CategoryId = c.id
                               LEFT JOIN UserProfile u ON p.UserId = u.id
+                            WHERE p.IsDeleted = 0
                          ORDER BY p.PostedDate DESC";
 
                     var reader = cmd.ExecuteReader();
@@ -61,7 +62,7 @@ namespace SwagSwap.Repositories
                     cmd.CommandText = @"
                             SELECT p.Id, p.UserId, p.Title, p.Description,  p.Value, 
                               p.ImageUrl AS PostImage,
-                              p.PostedDate,
+                              p.PostedDate, p.IsDeleted,
                               p.CategoryId,  p.Size, c.Id as CategoryId,
                               c.[Name] AS CategoryName, u.Id as UserProfileId, u.FirebaseUserId,
                               u.FirstName, u.LastName, u.DisplayName, 
@@ -70,7 +71,7 @@ namespace SwagSwap.Repositories
                          FROM Posts p
                               LEFT JOIN Categories c ON p.CategoryId = c.id
                               LEFT JOIN UserProfile u ON p.UserId = u.id
-                         WHERE p.UserId != @currentUserId
+                         WHERE p.UserId != @currentUserId AND p.isDeleted = 0
                          ORDER BY p.PostedDate DESC";
                     DbUtils.AddParameter(cmd, "@currentUserId", currentUserId);
 
@@ -101,7 +102,7 @@ namespace SwagSwap.Repositories
                     cmd.CommandText = @"
                         SELECT p.Id, p.UserId, p.Title, p.Description,  p.Value, 
                               p.ImageUrl AS PostImage,
-                              p.PostedDate,
+                              p.PostedDate, p.IsDeleted,
                               p.CategoryId,  p.Size, c.Id as CategoryId,
                               c.[Name] AS CategoryName, u.Id as UserProfileId, u.FirebaseUserId,
                               u.FirstName, u.LastName, u.DisplayName, 
@@ -110,7 +111,7 @@ namespace SwagSwap.Repositories
                          FROM Posts p
                               LEFT JOIN Categories c ON p.CategoryId = c.id
                               LEFT JOIN UserProfile u ON p.UserId = u.id
-                        WHERE FirebaseUserId = @FirebaseUserId 
+                        WHERE FirebaseUserId = @FirebaseUserId AND p.isDeleted = 0
                     ORDER BY p.PostedDate DESC";
                     DbUtils.AddParameter(cmd, "@firebaseUserId", firebaseUserId);
                     var reader = cmd.ExecuteReader();
@@ -138,7 +139,7 @@ namespace SwagSwap.Repositories
                     cmd.CommandText = @"
                     SELECT p.Id, p.UserId, p.Title, p.Description,  p.Value, 
                               p.ImageUrl AS PostImage,
-                              p.PostedDate,
+                              p.PostedDate, p.IsDeleted,
                               p.CategoryId,  p.Size, c.Id as CategoryId,
                               c.[Name] AS CategoryName, u.Id as UserProfileId, u.FirebaseUserId,
                               u.FirstName, u.LastName, u.DisplayName, 
@@ -147,7 +148,7 @@ namespace SwagSwap.Repositories
                          FROM Posts p
                               LEFT JOIN Categories c ON p.CategoryId = c.id
                               LEFT JOIN UserProfile u ON p.UserId = u.id
-                         WHERE p.id = @id";
+                         WHERE p.id = @id AND p.isDeleted = 0";
 
                     DbUtils.AddParameter(cmd, "@id", id);
                     var reader = cmd.ExecuteReader();
@@ -175,10 +176,10 @@ namespace SwagSwap.Repositories
                 {
                     cmd.CommandText = @"
                         INSERT INTO Posts (
-                            Title, UserId, Description, Value, ImageUrl, PostedDate, CategoryId, Size )
+                            Title, UserId, Description, Value, ImageUrl, PostedDate, CategoryId, Size, IsDeleted )
                         OUTPUT INSERTED.ID
                         VALUES (
-                            @Title,@UserId, @Description, @Value, @ImageUrl, @PostedDate, @CategoryId, @Size
+                            @Title,@UserId, @Description, @Value, @ImageUrl, @PostedDate, @CategoryId, @Size, 0
                             )";
                     DbUtils.AddParameter(cmd, "@Title", post.Title);
                     DbUtils.AddParameter(cmd, "@UserId", post.UserId);
@@ -205,7 +206,8 @@ namespace SwagSwap.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                            DELETE Posts                           
+                            UPDATE Posts
+                            SET IsDeleted = 1
                             WHERE Id = @id
                         ";
 
@@ -293,7 +295,7 @@ namespace SwagSwap.Repositories
                     cmd.CommandText = @"
                             SELECT p.Id, p.UserId, p.Title, p.Description,  p.Value, 
                               p.ImageUrl AS PostImage,
-                              p.PostedDate,
+                              p.PostedDate, p.isDeleted,
                               p.CategoryId,  p.Size, c.Id as CategoryId,
                               c.[Name] AS CategoryName, u.Id as UserProfileId, u.FirebaseUserId,
                               u.FirstName, u.LastName, u.DisplayName, 
@@ -302,7 +304,7 @@ namespace SwagSwap.Repositories
                          FROM Posts p
                               LEFT JOIN Categories c ON p.CategoryId = c.id
                               LEFT JOIN UserProfile u ON p.UserId = u.id
-                         WHERE p.CategoryId = @id
+                         WHERE p.CategoryId = @id zn p.isDeleted = 0
                          ORDER BY p.PostedDate DESC";
                     DbUtils.AddParameter(cmd, "@id", id);
 

@@ -28,6 +28,12 @@ code {
   
 }
 
+.postImageForMessage {
+  height: 400px;
+  width: 350px;
+  justify-content: center;
+}
+
 .nav-logo{
   height: 50px;
   width: 50px;
@@ -79,6 +85,12 @@ code {
   margin-bottom: 2rem;
   font-size: large;
   border: solid #9EC4C5 5px;
+}
+
+.convo-cards {
+ 
+  height: 675px;
+  overflow: scroll;
 }
 /* 
 .messageCurl{
