@@ -17,6 +17,29 @@ const MyPostForm = () => {
 
     const [newPost, setNewPost] = useState(emptyPost);
     const [category, setCategory] = useState([]);
+    const [image, setImage] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const uploadImage = async e => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'swagSwap')
+        setLoading(true)
+        const res = await fetch(
+            'https://api.cloudinary.com/v1_1/dzayiv7cv/image/upload',
+            {
+                method: 'POST',
+                body: data
+            }
+        )
+
+        const file = await res.json()
+
+        setImage(file.secure_url)
+        setLoading(false)
+        newPost.imageUrl = file.secure_url
+    }
 
     const history = useHistory();
 
@@ -75,9 +98,21 @@ const MyPostForm = () => {
             </FormGroup>
             <FormGroup>
                 <Label for="imageUrl">Image</Label>
+                <input type="file"
+                    name="file"
+                    placeholder="Upload an image"
+                    onChange={uploadImage} />
+
+                {loading ? (
+                    <h3>Loading...</h3>
+                ) : (
+                    <img src={image} style={{ width: '300px' }} />
+                )}
+                {/* <Label for="imageUrl">Image</Label>
                 <Input type="text" name="imageUrl" id="imageUrl" placeholder="image"
                     value={newPost.imageUrl}
-                    onChange={handleInputChange} />
+                    onChange={handleInputChange} /> */}
+
             </FormGroup>
             <FormGroup>
                 <Label for="categoryId">Category</Label>
@@ -102,4 +137,4 @@ const MyPostForm = () => {
     );
 };
 
-export default MyPostForm;
+export default MyPostForm
