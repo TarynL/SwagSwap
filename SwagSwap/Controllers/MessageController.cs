@@ -44,7 +44,7 @@ namespace SwagSwap.Controllers
 
         // GET: api/<MessageController>
         [HttpGet("received/{id}")]
-        public IActionResult GetAllReceived(int id, int senderId)
+        public IActionResult GetAllReceived(int id)
         {
             var currentUserId = GetCurrentUserProfileId();
 
@@ -82,11 +82,7 @@ namespace SwagSwap.Controllers
             var userProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
             return userProfile.Id;
         }
-        private string GetCurrentFirebaseUserProfileId()
-        {
-            string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            return id;
-        }
+       
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { register } from "../modules/authManager";
+import Swag from "../images/Swag.png"
+
 
 export default function Register() {
     const history = useHistory();
@@ -31,12 +33,12 @@ export default function Register() {
             <div className="container w-75 text-center">
 
                 <div className="text-center" >
-                    <img style={{ height: 150, width: 150 }} src="Swag.png" />
+                    <img style={{ height: 150, width: 150 }} src={Swag} />
                 </div>
                 <div className="text-center" >
                     <img src="groupshot.png" />
                 </div>
-                <Form className="container w-50 text-center" onSubmit={registerClick}>
+                <Form className="container w-50 text-center register" onSubmit={registerClick}>
                     <fieldset>
                         <FormGroup >
                             <Label htmlFor="firstName">First Name</Label>
@@ -70,9 +72,14 @@ export default function Register() {
                             <Label for="confirmPassword">Confirm Password</Label>
                             <Input id="confirmPassword" type="password" onChange={e => setConfirmPassword(e.target.value)} />
                         </FormGroup>
-                        <FormGroup >
+                        <FormGroup className="registerButtons">
                             <Button className="btn-light">Register</Button>
                         </FormGroup>
+                        <div className="text-center">
+                            <em >
+                                Already registered? <Link to="login">Login</Link>
+                            </em>
+                        </div>
                     </fieldset>
                 </Form>
             </div>

@@ -3,7 +3,7 @@ import ReceivedMessage from "./ReceivedMessage";
 import SentMessage from "./SentMessage";
 import { Card, CardBody } from "reactstrap";
 import { getAllSenderMessagesByPostId, getAllReceiverMessagesByPostId } from "../../modules/messageManager";
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, CardHeader } from 'reactstrap';
 import { addMessage } from '../../modules/messageManager';
 import { getPostById } from '../../modules/postManager';
@@ -84,6 +84,7 @@ const MyMessageList = () => {
     let uniqueNames = new Set();
 
     const filtered = convosNames.filter(e => {
+
         const duplicate = uniqueNames.has(e.id);
         uniqueNames.add(e.id);
         return !duplicate;
@@ -128,7 +129,9 @@ const MyMessageList = () => {
                                 <CardHeader>Conversation With</CardHeader>
                                 <CardBody>
                                     <Button className="text-center" value={m.id} onClick={handleOnClick} > {m.displayName}</Button>
-
+                                    <Link to={`/userPosts/${m.id}`}>
+                                        <Button className="btn btn-light">See Posts</Button>
+                                    </Link>
                                 </CardBody>
                             </Card>
                             )

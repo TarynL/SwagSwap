@@ -111,6 +111,7 @@ export const updatePost = (editedPost) => {
 };
 
 export const getPostsByCategoryId = (id) => {
+
     return getToken().then((token) => {
 
         return fetch(`${baseUrl}/filter/${id}`, {
@@ -125,5 +126,24 @@ export const getPostsByCategoryId = (id) => {
                 throw new Error("An unknown error occurred while trying to get post by categoryId.");
             }
         });
+    });
+};
+
+export const getPostsByUserId = (id) => {
+    return getToken().then((token) => {
+
+        return fetch(`${baseUrl}/selected/${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(resp => {
+                if (resp.ok) {
+                    return resp.json();
+                } else {
+                    throw new Error("An unknown error occurred while trying to get post by userId.");
+                }
+            });
     });
 };

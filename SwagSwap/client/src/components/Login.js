@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
 import { login } from "../modules/authManager";
+import Swag from "../images/Swag.png"
 
 export default function Login() {
     const history = useHistory();
@@ -18,9 +19,9 @@ export default function Login() {
 
     return (
         <>
-            <div className="container w-75 text-center">
+            <div className="container w-75 text-center login">
                 <div  >
-                    <img style={{ height: 150, width: 150 }} src="Swag.png" />
+                    <img style={{ height: 150, width: 150 }} src={Swag} />
                 </div>
                 <div  >
                     <img src="groupshot.png" />

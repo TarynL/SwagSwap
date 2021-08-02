@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Login";
@@ -10,6 +9,7 @@ import MyPostEdit from "./myPosts/myPostEdit";
 import PostDetails from "./posts/PostDetails";
 import MessageList from "./messages/MessageList";
 import MyMessageList from "./messages/MyMessageList";
+import SelectedUserPostList from "./posts/SelectedUserPostList"
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -21,6 +21,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/myPosts" exact>
                     {isLoggedIn ? <MyPostList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/userPosts/:id" exact>
+                    {isLoggedIn ? <SelectedUserPostList /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/post/add" exact>
@@ -42,11 +46,6 @@ export default function ApplicationViews({ isLoggedIn }) {
                 <Route path="/messages/:id" exact>
                     {isLoggedIn ? <MyMessageList /> : <Redirect to="/login" />}
                 </Route>
-
-                {/* <Route path="/message/add/:id" exact>
-                    {isLoggedIn ? <MessageForm /> : <Redirect to="/login" />}
-                </Route> */}
-
 
                 <Route path="/login">
                     <Login />
