@@ -108,10 +108,6 @@ const MyPostForm = () => {
                 ) : (
                     <img src={image} style={{ width: '300px' }} />
                 )}
-                {/* <Label for="imageUrl">Image</Label>
-                <Input type="text" name="imageUrl" id="imageUrl" placeholder="image"
-                    value={newPost.imageUrl}
-                    onChange={handleInputChange} /> */}
 
             </FormGroup>
             <FormGroup>

@@ -10,6 +10,7 @@ const MyPostEdit = () => {
     const { id } = useParams();
     const history = useHistory();
 
+
     const handleInputChange = (evt) => {
         const value = evt.target.value;
         const key = evt.target.id;
@@ -76,12 +77,12 @@ const MyPostEdit = () => {
                     value={editPost.value}
                     onChange={handleInputChange} />
             </FormGroup>
-            <FormGroup>
+            {/* <FormGroup>
                 <Label for="imageUrl">Image</Label>
                 <Input type="text" name="imageUrl" id="imageUrl" placeholder="image"
                     value={editPost.imageUrl}
                     onChange={handleInputChange} />
-            </FormGroup>
+            </FormGroup> */}
             <FormGroup>
                 <Label for="categoryId">Category</Label>
                 <select value={editPost.categoryId} name="categoryId" id="categoryId" onChange={handleInputChange} className='form-control'>

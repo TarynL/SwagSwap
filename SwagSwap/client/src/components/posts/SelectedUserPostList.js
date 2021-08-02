@@ -10,11 +10,10 @@ const SelectedUserPostList = () => {
 
 
     const getUserPosts = () => {
-        console.log(id)
+
         getPostsByUserId(id)
             .then(setUserPosts);
     };
-
 
     useEffect(() => {
         getUserPosts(id);
@@ -29,7 +28,7 @@ const SelectedUserPostList = () => {
                 <div className="container">
                     <div className="row m-5 ">
                         {userPosts.map((post) => (
-                            <Post userPost={post} key={post.id} />
+                            <Post post={post} key={post.id} />
                         ))}
                     </div>
                 </div>

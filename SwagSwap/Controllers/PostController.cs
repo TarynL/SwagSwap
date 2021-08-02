@@ -81,7 +81,7 @@ namespace SwagSwap.Controllers
             }
             return Ok(post);
         }
-        [HttpGet("selected/${id}")]
+        [HttpGet("selected/{id}")]
         public IActionResult GetPostsByUserId(int id)
         {
             var post = _postRepository.GetAllPostsByUserId(id);
