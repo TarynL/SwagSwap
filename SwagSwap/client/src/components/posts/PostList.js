@@ -9,8 +9,8 @@ import { getAllCategories } from "../../modules/categoryManager";
 const PostList = () => {
     const [posts, setPosts] = useState([]);
     const [category, setCategory] = useState([]);
-    // const [postByCategory, setPostByCategory] = useState([]);
-    // const { id } = useParams();
+    const [postByCategory, setPostByCategory] = useState([]);
+    const { id } = useParams();
 
 
 
@@ -25,21 +25,20 @@ const PostList = () => {
     }
 
 
-    // const handleCategoryDropdown = (e) => {
-    //     const value = e.target.value;
-    //     const key = e.target.id;
-    //     const categoryPost = [];
-    //     categoryPost[key] = value;
-    //     getPostsByCategoryId(id)
-    //         .then(setPostByCategory(categoryPost))
+    const handleCategoryDropdown = (e) => {
+        const value = e.target.value;
+        const key = e.target.id;
+        categoryPost[key] = value;
+        getPostsByCategoryId(id)
+            .then(setPostByCategory(categoryPost))
 
-    // }
+    }
 
 
     useEffect(() => {
         getCategories();
         getPosts();
-        // getPostsByCategoryId(id);
+        getPostsByCategoryId(id);
 
     }, []);
 
@@ -52,7 +51,7 @@ const PostList = () => {
                 <Form className="container row justify-content-center ">
                     <FormGroup className="Col-md-6 m-2 p-2">
                         <Label for="categoryId">Filter by Category</Label>
-                        <select name="categoryId" id="categoryId" className='form-control'>
+                        <select onChange={handleCategoryDropdown} name="categoryId" id="categoryId" className='form-control'>
                             <option value="0">Filter by Category</option>
                             {category.map(c => (
                                 <option key={c.id} value={c.id}>{c.name}</option>

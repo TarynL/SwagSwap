@@ -6,7 +6,7 @@ const MyPost = ({ myPost, handleDelete }) => {
 
     return (
         <>
-            <Card className="col-xs-1 m-4 p-0">
+            <Card className="col-s-1 m-4 p-0">
                 <CardBody className="card-content">
                     <img className="postImage" src={myPost.imageUrl} />
 
