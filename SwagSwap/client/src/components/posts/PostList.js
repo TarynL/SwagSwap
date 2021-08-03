@@ -9,8 +9,7 @@ import { getAllCategories } from "../../modules/categoryManager";
 const PostList = () => {
     const [posts, setPosts] = useState([]);
     const [category, setCategory] = useState([]);
-    const [postByCategory, setPostByCategory] = useState([]);
-    const { id } = useParams();
+    const [categoryId, setCategoryId] = useState(0);
 
 
 
@@ -26,19 +25,28 @@ const PostList = () => {
 
 
     const handleCategoryDropdown = (e) => {
-        const value = e.target.value;
-        const key = e.target.id;
-        categoryPost[key] = value;
-        getPostsByCategoryId(id)
-            .then(setPostByCategory(categoryPost))
+        const key = e.target.value
+        setCategoryId(key)
+    }
 
+    const handleFilter = () => {
+        if (categoryId === 0) {
+            window.alert("Please select a filter")
+        }
+        else {
+            getPostsByCategoryId(categoryId)
+                .then(res => setPosts(res))
+        }
+    }
+
+    const handleReset = () => {
+        getPosts()
     }
 
 
     useEffect(() => {
         getCategories();
         getPosts();
-        getPostsByCategoryId(id);
 
     }, []);
 
@@ -54,11 +62,15 @@ const PostList = () => {
                         <select onChange={handleCategoryDropdown} name="categoryId" id="categoryId" className='form-control'>
                             <option value="0">Filter by Category</option>
                             {category.map(c => (
+
                                 <option key={c.id} value={c.id}>{c.name}</option>
                             ))}
                         </select>
+                        <Button onClick={handleFilter}>Filter</Button>
+                        <Button onClick={handleReset}> Reset</Button>
+
                     </FormGroup>
-                    <FormGroup className="Col-md-6 m-2 p-2 float-right">
+                    {/* <FormGroup className="Col-md-6 m-2 p-2 float-right">
                         <Label for="value">Filter by Value</Label>
                         <select name="value" id="value" className='form-control'>
                             <option value="0">Filter by Value</option>
@@ -68,7 +80,7 @@ const PostList = () => {
                             <option value="">$150 and Up</option>
 
                         </select>
-                    </FormGroup>
+                    </FormGroup> */}
                 </Form>
 
 
