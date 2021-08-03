@@ -9,8 +9,7 @@ import { getAllCategories } from "../../modules/categoryManager";
 const PostList = () => {
     const [posts, setPosts] = useState([]);
     const [category, setCategory] = useState([]);
-    // const [postByCategory, setPostByCategory] = useState([]);
-    // const { id } = useParams();
+    const [categoryId, setCategoryId] = useState(0);
 
 
 
@@ -25,21 +24,30 @@ const PostList = () => {
     }
 
 
-    // const handleCategoryDropdown = (e) => {
-    //     const value = e.target.value;
-    //     const key = e.target.id;
-    //     const categoryPost = [];
-    //     categoryPost[key] = value;
-    //     getPostsByCategoryId(id)
-    //         .then(setPostByCategory(categoryPost))
+    const handleCategoryDropdown = (e) => {
+        const key = e.target.value
+        setCategoryId(key)
+    }
 
-    // }
+    const handleFilter = () => {
+        if (categoryId === 0) {
+            window.alert("Please select a filter")
+        }
+        else {
+            getPostsByCategoryId(categoryId)
+                .then(res => setPosts(res))
+        }
+    }
+
+    const handleReset = () => {
+
+        getPosts()
+    }
 
 
     useEffect(() => {
         getCategories();
         getPosts();
-        // getPostsByCategoryId(id);
 
     }, []);
 
@@ -49,17 +57,23 @@ const PostList = () => {
                 <div className="header m-2 p-2 ">
                     <h1>Out With The Old, In With The New...For You</h1>
                 </div>
-                <Form className="container row justify-content-center ">
-                    <FormGroup className="Col-md-6 m-2 p-2">
-                        <Label for="categoryId">Filter by Category</Label>
-                        <select name="categoryId" id="categoryId" className='form-control'>
-                            <option value="0">Filter by Category</option>
-                            {category.map(c => (
-                                <option key={c.id} value={c.id}>{c.name}</option>
-                            ))}
-                        </select>
-                    </FormGroup>
-                    <FormGroup className="Col-md-6 m-2 p-2 float-right">
+                <div className="container ">
+                    <Form className="row w-25">
+                        <FormGroup className="col center">
+                            {/* <Label for="categoryId">Filter by Category</Label> */}
+                            <select onChange={handleCategoryDropdown} name="categoryId" id="categoryId" className='form-control'>
+                                <option value="0">Filter by Category</option>
+                                {category.map(c => (
+
+                                    <option key={c.id} value={c.id}>{c.name}</option>
+                                ))}
+                            </select>
+                            <div >
+                                <Button className="filterButton" onClick={handleFilter}>Filter</Button>
+                                <Button className="resetButton" onClick={handleReset}> Reset</Button>
+                            </div>
+                        </FormGroup>
+                        {/* <FormGroup className="Col-md-6 m-2 p-2 float-right">
                         <Label for="value">Filter by Value</Label>
                         <select name="value" id="value" className='form-control'>
                             <option value="0">Filter by Value</option>
@@ -69,8 +83,9 @@ const PostList = () => {
                             <option value="">$150 and Up</option>
 
                         </select>
-                    </FormGroup>
-                </Form>
+                    </FormGroup> */}
+                    </Form>
+                </div>
 
 
                 <div className="container">

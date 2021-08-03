@@ -21,6 +21,8 @@ code {
   font-size: 100px;
   justify-self: center;
   text-align: center;
+ 
+  /* background-image: url("../src/images/clothesStack.jpg"); */
 }
 .postImage {
   height: 300px;
@@ -140,8 +142,16 @@ code {
   
 }
 
+.filterButton{
+  margin-top:  1rem;
+} 
+.resetButton{
+  margin-left: 1rem;
+  margin-top:  1rem;
 
+}
 .register {
   
   margin-bottom: 3rem;
 }
+

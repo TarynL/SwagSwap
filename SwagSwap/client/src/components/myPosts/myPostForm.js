@@ -79,26 +79,9 @@ const MyPostForm = () => {
         <Form className="container w-25 text-center">
             <h2>New Post</h2>
             <FormGroup>
-                <Label for="title">Title</Label>
-                <Input type="text" name="title" id="title" placeholder="title"
-                    value={newPost.title}
-                    onChange={handleInputChange} />
-            </FormGroup>
-            <FormGroup>
-                <Label for="description">Description</Label>
-                <Input type="text" name="description" id="description" placeholder="description"
-                    value={newPost.description}
-                    onChange={handleInputChange} />
-            </FormGroup>
-            <FormGroup>
-                <Label for="value">Value</Label>
-                <Input type="text" name="value" id="value" placeholder="value"
-                    value={newPost.value}
-                    onChange={handleInputChange} />
-            </FormGroup>
-            <FormGroup>
                 <Label for="imageUrl">Image</Label>
-                <input type="file"
+
+                <Input type="file"
                     name="file"
                     placeholder="Upload an image"
                     onChange={uploadImage} />
@@ -111,6 +94,25 @@ const MyPostForm = () => {
 
             </FormGroup>
             <FormGroup>
+                <Label for="title">Title</Label>
+                <Input type="text" name="title" id="title" placeholder="Title"
+                    value={newPost.title}
+                    onChange={handleInputChange} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="description">Description</Label>
+                <Input type="text" name="description" id="description" placeholder="Description"
+                    value={newPost.description}
+                    onChange={handleInputChange} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="value">Value</Label>
+                <Input type="text" name="value" id="value" placeholder="Value"
+                    value={newPost.value}
+                    onChange={handleInputChange} />
+            </FormGroup>
+
+            <FormGroup>
                 <Label for="categoryId">Category</Label>
                 <select value={newPost.categoryId} name="categoryId" id="categoryId" onChange={handleInputChange} className='form-control'>
                     <option value="0">Select a Category</option>
@@ -121,7 +123,7 @@ const MyPostForm = () => {
             </FormGroup>
             <FormGroup>
                 <Label for="size">Size</Label>
-                <Input type="text" name="size" id="size" placeholder="size"
+                <Input type="text" name="size" id="size" placeholder="Size"
                     value={newPost.size}
                     onChange={handleInputChange} />
             </FormGroup>

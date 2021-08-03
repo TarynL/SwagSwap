@@ -10,7 +10,7 @@ const Post = ({ post }) => {
 
     return (
         <>
-            <Card className="col-s-1 m-4 p-1">
+            <Card className="col-s-1 m-4 p-0">
 
                 <Link to={`/post/${post.id}`}>
                     <img className="postImage" src={post.imageUrl} />
