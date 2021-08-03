@@ -40,6 +40,7 @@ const PostList = () => {
     }
 
     const handleReset = () => {
+
         getPosts()
     }
 
@@ -56,21 +57,23 @@ const PostList = () => {
                 <div className="header m-2 p-2 ">
                     <h1>Out With The Old, In With The New...For You</h1>
                 </div>
-                <Form className="container row justify-content-center ">
-                    <FormGroup className="Col-md-6 m-2 p-2">
-                        <Label for="categoryId">Filter by Category</Label>
-                        <select onChange={handleCategoryDropdown} name="categoryId" id="categoryId" className='form-control'>
-                            <option value="0">Filter by Category</option>
-                            {category.map(c => (
+                <div className="container ">
+                    <Form className="row w-25">
+                        <FormGroup className="col center">
+                            {/* <Label for="categoryId">Filter by Category</Label> */}
+                            <select onChange={handleCategoryDropdown} name="categoryId" id="categoryId" className='form-control'>
+                                <option value="0">Filter by Category</option>
+                                {category.map(c => (
 
-                                <option key={c.id} value={c.id}>{c.name}</option>
-                            ))}
-                        </select>
-                        <Button onClick={handleFilter}>Filter</Button>
-                        <Button onClick={handleReset}> Reset</Button>
-
-                    </FormGroup>
-                    {/* <FormGroup className="Col-md-6 m-2 p-2 float-right">
+                                    <option key={c.id} value={c.id}>{c.name}</option>
+                                ))}
+                            </select>
+                            <div >
+                                <Button className="filterButton" onClick={handleFilter}>Filter</Button>
+                                <Button className="resetButton" onClick={handleReset}> Reset</Button>
+                            </div>
+                        </FormGroup>
+                        {/* <FormGroup className="Col-md-6 m-2 p-2 float-right">
                         <Label for="value">Filter by Value</Label>
                         <select name="value" id="value" className='form-control'>
                             <option value="0">Filter by Value</option>
@@ -81,7 +84,8 @@ const PostList = () => {
 
                         </select>
                     </FormGroup> */}
-                </Form>
+                    </Form>
+                </div>
 
 
                 <div className="container">

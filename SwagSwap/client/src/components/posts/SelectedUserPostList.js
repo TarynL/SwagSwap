@@ -24,8 +24,12 @@ const SelectedUserPostList = () => {
 
     return (
         <>
+            <div className="userPosts-header">
+            </div>
+            <div className="m-2 p-2">
+                <Button onClick={() => history.goBack()} className="btn btn-light">Go Back</Button>
+            </div>
             <div >
-
 
                 <div className="container">
                     <div className="row m-5 ">
@@ -35,7 +39,6 @@ const SelectedUserPostList = () => {
                     </div>
                 </div>
 
-                <Button onClick={() => history.goBack()} className="btn btn-light">Go Back</Button>
 
             </div>
         </>
