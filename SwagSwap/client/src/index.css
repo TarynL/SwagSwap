@@ -116,7 +116,8 @@ code {
 .convo-cards {
  
   height: 675px;
-  overflow: scroll;
+  overflow: auto ;
+  
 }
 
 
@@ -214,6 +215,7 @@ code {
 .myPostCard {
   height: 400px;
   width: 300px;
+  margin-bottom: 2rem;
 }
 
 .card-content{
@@ -226,7 +228,12 @@ code {
   width: 300px
  
 }
-
+.add{
+  float: right;
+  margin: 1rem 2rem 0 0;
+  padding: 5px;
+  
+}
 .edit{
   margin-right: 5px;
 }

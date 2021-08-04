@@ -20,8 +20,13 @@ export default function Register() {
     const registerClick = (e) => {
         e.preventDefault();
         if (password && password !== confirmPassword) {
-            alert("Passwords don't match. Do better.");
-        } else {
+            alert("Passwords must match.");
+        }
+        else if (firstName === '' || lastName === '' || displayName === '' || imageUrl === '' || email === '' || userZip === '') {
+            alert("Please fill out all fields to continue.")
+        }
+
+        else {
             const userProfile = { firstName, lastName, displayName, imageUrl, email, userZip };
             register(userProfile, password)
                 .then(() => history.push("/"));

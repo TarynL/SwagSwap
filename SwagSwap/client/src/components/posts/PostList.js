@@ -71,8 +71,8 @@ const PostList = () => {
                                 ))}
                             </select>
                             <div >
-                                <Button className="filterButton" onClick={handleFilter}>Filter</Button>
-                                <Button className="resetButton" onClick={handleReset}> Reset</Button>
+                                <Button className="filterButton btn btn-light" onClick={handleFilter}>Filter</Button>
+                                <Button className="resetButton btn btn-light" onClick={handleReset}> Reset</Button>
                             </div>
                         </div>
                     </div>
