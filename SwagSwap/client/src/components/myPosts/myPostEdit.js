@@ -56,51 +56,48 @@ const MyPostEdit = () => {
     }, [])
 
     return (
-        <Form className="container w-25 text-center">
-            <h2>Edit Post</h2>
-            <FormGroup>
-                <Label for="title">Title</Label>
-                <Input type="text" name="title" id="title" placeholder="title"
-                    value={editPost.title}
-                    onChange={handleInputChange} />
-            </FormGroup>
-            <FormGroup>
-                <Label for="description">Description</Label>
-                <textarea type="text" name="description" id="description" placeholder="description"
-                    value={editPost.description}
-                    onChange={handleInputChange}
-                    rows="5" cols="60" />
-            </FormGroup>
-            <FormGroup>
-                <Label for="value">Value</Label>
-                <Input type="text" name="value" id="value" placeholder="value"
-                    value={editPost.value}
-                    onChange={handleInputChange} />
-            </FormGroup>
-            {/* <FormGroup>
-                <Label for="imageUrl">Image</Label>
-                <Input type="text" name="imageUrl" id="imageUrl" placeholder="image"
-                    value={editPost.imageUrl}
-                    onChange={handleInputChange} />
-            </FormGroup> */}
-            <FormGroup>
-                <Label for="categoryId">Category</Label>
-                <select value={editPost.categoryId} name="categoryId" id="categoryId" onChange={handleInputChange} className='form-control'>
-                    <option value="0">Select a Category</option>
-                    {category.map(c => (
-                        <option key={c.id} value={c.id}>{c.name}</option>
-                    ))}
-                </select>
-            </FormGroup>
-            <FormGroup>
-                <Label for="size">Size</Label>
-                <Input type="text" name="size" id="size" placeholder="size"
-                    value={editPost.size}
-                    onChange={handleInputChange} />
-            </FormGroup>
-
-            <Button className="btn btn-primary" onClick={handleUpdate}>Submit</Button>
-            <Button className="btn btn-primary" onClick={() => history.push(`/myPosts`)}>Cancel</Button>
+        <Form className="editPost container w-25 text-center">
+            <h2 className="editPost-header">Edit Post</h2>
+            <div className="editPost-form">
+                <FormGroup >
+                    <Label for="title">Title</Label>
+                    <Input type="text" name="title" id="title" placeholder="title"
+                        value={editPost.title}
+                        onChange={handleInputChange} />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="description">Description</Label>
+                    <textarea type="text" name="description" id="description" placeholder="description"
+                        value={editPost.description}
+                        onChange={handleInputChange}
+                        rows="5" cols="50" />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="value">Value</Label>
+                    <Input type="text" name="value" id="value" placeholder="value"
+                        value={editPost.value}
+                        onChange={handleInputChange} />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="categoryId">Category</Label>
+                    <select value={editPost.categoryId} name="categoryId" id="categoryId" onChange={handleInputChange} className='form-control'>
+                        <option value="0">Select a Category</option>
+                        {category.map(c => (
+                            <option key={c.id} value={c.id}>{c.name}</option>
+                        ))}
+                    </select>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="size">Size</Label>
+                    <Input type="text" name="size" id="size" placeholder="size"
+                        value={editPost.size}
+                        onChange={handleInputChange} />
+                </FormGroup>
+                <div>
+                    <Button className="editPost-submit btn btn-primary" onClick={handleUpdate}>Submit</Button>
+                    <Button className="editPost-cancel btn btn-primary" onClick={() => history.push(`/myPosts`)}>Cancel</Button>
+                </div>
+            </div>
         </Form>
     );
 

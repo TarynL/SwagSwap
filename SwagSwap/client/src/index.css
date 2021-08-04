@@ -14,12 +14,39 @@ code {
     monospace;
 }
 
+.mylist, .postlist{
+  margin: 3rem;
+}
 
+.newPost, .editPost, .detailsPost{
+  border: solid 15px #F2C2C2;
+  padding: 0 0 4rem 0;
+}
+
+.newPost-header, .editPost-header, .detailsPost-header{
+  /* margin: 1rem 0 3rem 0; */
+  padding: 2rem;
+  background-color: #F2c2c2;
+}
+
+.newPost-form, .editPost-form{
+  margin: 0 1rem 1rem 1rem;
+}
+.newPost-cancel, .editPost-cancel, .detailsPost-message{
+  margin-left: 1rem;
+}
+.detailsPost-card{
+  background-color: #C1DDD8 ;
+  border: 0 solid #C1DDD8;
+}
+
+.imageInput{
+  margin-left: 7rem;
+}
 .header{
   background-color: #F5E4DC;
   height: 200px;
-  font-size: 100px;
-  justify-self: center;
+  
   text-align: center;
  
   /* background-image: url("../src/images/clothesStack.jpg"); */
@@ -27,6 +54,7 @@ code {
 .postImage {
   height: 300px;
   width: 250px;
+  object-fit: cover;
   
 }
 
@@ -94,37 +122,6 @@ code {
   height: 675px;
   overflow: scroll;
 }
-/* 
-.messageCurl{
-  width:10px;
-  height:10px;
-  background-color:#F2C2C2;
-  border-bottom-right-radius: 5px 5px;
-} */
-
-
-/* .messageCurlCover{
-  margin-left: 2%;
-  content: "";
-  margin:-5px;
-  margin-left:0px;
-  width:20px;
-  height:20px;
-  border-radius: 50%;
-  background-color: #F2C2C2;
-}
- */
-
-
-
-
-.card-date{
-  font-size: 25px;
-}
-
-.card-name{
-  font-size:35px;
-} 
 
 
 .message-container-cards{

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Jumbotron, Container } from 'reactstrap';
 import Post from "./Post";
 import { getAllPosts } from "../../modules/postManager";
 import { getPostsByCategoryId } from "../../modules/postManager";
@@ -54,12 +53,15 @@ const PostList = () => {
     return (
         <>
             <div >
-                <div className="header m-2 p-2 ">
-                    <h1>Out With The Old, In With The New...For You</h1>
-                </div>
-                <div className="container ">
-                    <Form className="row w-25">
-                        <FormGroup className="col center">
+                <Jumbotron fluid className="header">
+                    <Container fluid>
+                        {/* <div className="header m-2 p-2 "> */}
+                        <h1><b>Out With The Old, In With The New...For You</b></h1>
+                    </Container>
+                </Jumbotron>
+                <div className="container w-25 text-center">
+                    <div className="row  ">
+                        <div className="col sm-3">
                             {/* <Label for="categoryId">Filter by Category</Label> */}
                             <select onChange={handleCategoryDropdown} name="categoryId" id="categoryId" className='form-control'>
                                 <option value="0">Filter by Category</option>
@@ -72,8 +74,9 @@ const PostList = () => {
                                 <Button className="filterButton" onClick={handleFilter}>Filter</Button>
                                 <Button className="resetButton" onClick={handleReset}> Reset</Button>
                             </div>
-                        </FormGroup>
-                        {/* <FormGroup className="Col-md-6 m-2 p-2 float-right">
+                        </div>
+                    </div>
+                    {/* <FormGroup className="Col-md-6 m-2 p-2 float-right">
                         <Label for="value">Filter by Value</Label>
                         <select name="value" id="value" className='form-control'>
                             <option value="0">Filter by Value</option>
@@ -84,18 +87,18 @@ const PostList = () => {
 
                         </select>
                     </FormGroup> */}
-                    </Form>
-                </div>
-
-
-                <div className="container">
-                    <div className="row m-5 ">
-                        {posts.map((post) => (
-                            <Post post={post} key={post.id} />
-                        ))}
-                    </div>
                 </div>
             </div>
+
+
+            <div className="postlist">
+                <div className="row ">
+                    {posts.map((post) => (
+                        <Post post={post} key={post.id} />
+                    ))}
+                </div>
+            </div>
+
         </>
     );
 

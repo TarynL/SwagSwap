@@ -23,11 +23,15 @@ const MyPostList = () => {
     return (
 
         <div>
-            <Link to={`/post/add`}>
-                <button className="btn btn-secondary" >Add New Post</button>
-            </Link>
-            <div className="container">
-                <div className="row m-5 ">
+            <div className="row">
+                <div className="col">
+                    <Link to={`/post/add`}>
+                        <button className="btn btn-secondary float-right p-3 m-2" >Add New Post</button>
+                    </Link>
+                </div>
+            </div>
+            <div className="mylist">
+                <div className="row">
                     {myPosts.map((myPost) => (
                         <MyPost myPost={myPost} key={myPost.id} handleDelete={handleDelete} />
                     ))}

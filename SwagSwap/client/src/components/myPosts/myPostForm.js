@@ -76,61 +76,65 @@ const MyPostForm = () => {
 
 
     return (
-        <Form className="container w-25 text-center">
-            <h2>New Post</h2>
-            <FormGroup>
-                <Label for="imageUrl">Image</Label>
+        <Form className="newPost container w-25 text-center">
+            <h2 className="newPost-header">New Post</h2>
+            <div className="newPost-form">
+                <FormGroup >
+                    <Label for="imageUrl">Image</Label>
+                    <div className="imageInput">
+                        <Input type="file"
+                            name="file"
+                            placeholder="Upload an image"
+                            onChange={uploadImage} />
 
-                <Input type="file"
-                    name="file"
-                    placeholder="Upload an image"
-                    onChange={uploadImage} />
+                        {loading ? (
+                            <h3>Loading...</h3>
+                        ) : (
+                            <img src={image} style={{ width: '300px' }} />
+                        )}
+                    </div>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="title">Title</Label>
 
-                {loading ? (
-                    <h3>Loading...</h3>
-                ) : (
-                    <img src={image} style={{ width: '300px' }} />
-                )}
+                    <Input type="text" name="title" id="title" placeholder="Title"
+                        value={newPost.title}
+                        onChange={handleInputChange} />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="description">Description</Label>
+                    <textarea type="text" name="description" id="description" placeholder="description"
+                        value={newPost.description}
+                        onChange={handleInputChange}
+                        rows="5" cols="50" />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="value">Value</Label>
+                    <Input type="text" name="value" id="value" placeholder="Value"
+                        value={newPost.value}
+                        onChange={handleInputChange} />
+                </FormGroup>
 
-            </FormGroup>
-            <FormGroup>
-                <Label for="title">Title</Label>
-                <Input type="text" name="title" id="title" placeholder="Title"
-                    value={newPost.title}
-                    onChange={handleInputChange} />
-            </FormGroup>
-            <FormGroup>
-                <Label for="description">Description</Label>
-                <Input type="text" name="description" id="description" placeholder="Description"
-                    value={newPost.description}
-                    onChange={handleInputChange} />
-            </FormGroup>
-            <FormGroup>
-                <Label for="value">Value</Label>
-                <Input type="text" name="value" id="value" placeholder="Value"
-                    value={newPost.value}
-                    onChange={handleInputChange} />
-            </FormGroup>
-
-            <FormGroup>
-                <Label for="categoryId">Category</Label>
-                <select value={newPost.categoryId} name="categoryId" id="categoryId" onChange={handleInputChange} className='form-control'>
-                    <option value="0">Select a Category</option>
-                    {category.map(c => (
-                        <option key={c.id} value={c.id}>{c.name}</option>
-                    ))}
-                </select>
-            </FormGroup>
-            <FormGroup>
-                <Label for="size">Size</Label>
-                <Input type="text" name="size" id="size" placeholder="Size"
-                    value={newPost.size}
-                    onChange={handleInputChange} />
-            </FormGroup>
-
-            <Button className="btn btn-primary" onClick={handleSave}>Submit</Button>
-            <Button className="btn btn-primary" onClick={() => history.push(`/myPosts`)}>Cancel</Button>
-
+                <FormGroup>
+                    <Label for="categoryId">Category</Label>
+                    <select value={newPost.categoryId} name="categoryId" id="categoryId" onChange={handleInputChange} className='form-control'>
+                        <option value="0">Select a Category</option>
+                        {category.map(c => (
+                            <option key={c.id} value={c.id}>{c.name}</option>
+                        ))}
+                    </select>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="size">Size</Label>
+                    <Input type="text" name="size" id="size" placeholder="Size"
+                        value={newPost.size}
+                        onChange={handleInputChange} />
+                </FormGroup>
+                <div >
+                    <Button className="newPost-submit btn btn-primary" onClick={handleSave}>Submit</Button>
+                    <Button className="newPost-cancel btn btn-primary" onClick={() => history.push(`/myPosts`)}>Cancel</Button>
+                </div>
+            </div>
         </Form>
     );
 };
