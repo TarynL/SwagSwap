@@ -62,10 +62,15 @@ const MyPostForm = () => {
 
     const handleSave = (evt) => {
         evt.preventDefault();
+        if (newPost.title === '' || newPost.description === '' || newPost.value === 0 || newPost.imageUrl === '' || newPost.categoryId === 0 || newPost.size === '') {
+            window.alert("Please fill out all fields to continue.")
+        }
+        else {
+            addPost(newPost).then(() => {
+                history.push("/myPosts");
+            });
+        }
 
-        addPost(newPost).then((p) => {
-            history.push("/myPosts");
-        });
 
     };
 
@@ -76,7 +81,7 @@ const MyPostForm = () => {
 
 
     return (
-        <Form className="newPost container w-25 text-center">
+        <Form className="newPost container w-50 text-center">
             <h2 className="newPost-header">New Post</h2>
             <div className="newPost-form">
                 <FormGroup >

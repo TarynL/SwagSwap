@@ -7,20 +7,20 @@ const MyPost = ({ myPost, handleDelete }) => {
     return (
         <>
             <Col sm="2">
-                <Card className="m-2 ">
+                <Card className="m-4 myPostCard">
                     <CardBody className="card-content  p-0">
                         <img className="postImage" src={myPost.imageUrl} />
 
                     </CardBody>
-                    <CardFooter className="text-center">
+                    <CardFooter className="text-center cardFooter">
                         <Link to={`/post/edit/${myPost.id}`}>
-                            <Button className="btn btn-light">Edit</Button>
+                            <Button className="edit btn btn-light">Edit</Button>
                         </Link>
                         <Link>
-                            <Button className="btn btn-light" onClick={() => handleDelete(myPost.id)}>Delete</Button>
+                            <Button className="delete btn btn-light" onClick={() => handleDelete(myPost.id)}>Delete</Button>
                         </Link>
                         <Link to={`/messages/${myPost.id}`}>
-                            <Button className="btn btn-light">Messages</Button>
+                            <Button className="message btn btn-light">Messages</Button>
                         </Link>
                     </CardFooter>
                 </Card>

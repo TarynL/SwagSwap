@@ -1,11 +1,11 @@
 ﻿USE [master]
 GO
 
-IF db_id('Tester') IS NULL
-  CREATE DATABASE [Tester]
+IF db_id('SwagSwap') IS NULL
+  CREATE DATABASE [SwagSwap]
 GO
 
-USE [Tester]
+USE [SwagSwap]
 GO
 
 ---------------------------------------------------------------------------
