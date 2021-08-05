@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MyPost from "./myPost";
+import MyPost from "./MyPost";
 import { Link } from "react-router-dom";
 import { getAllPostsFromCurrentUser, deletePost } from "../../modules/postManager";
 
@@ -30,7 +30,7 @@ const MyPostList = () => {
                     </Link>
                 </div>
             </div>
-            <div className="mylist w-75">
+            <div className="mylist ">
                 <div className="row">
                     {myPosts.map((myPost) => (
                         <MyPost myPost={myPost} key={myPost.id} handleDelete={handleDelete} />

@@ -14,7 +14,7 @@ code {
     monospace;
 }
 
-.mylist, .postlist{
+.mylist {
   margin: 3rem;
 }
 
@@ -40,13 +40,17 @@ code {
 .imageInput{
   margin-left: 7rem;
 }
-.header{
+/* .header{
   background-color: #F5E4DC;
-  height: 200px;
+  height: 5px;
   
-  text-align: center;
- 
-  /* background-image: url("../src/images/clothesStack.jpg"); */
+} */
+.header{
+  margin-top: 0;
+}
+.landingLogo {
+  display:flex;
+  justify-content: center;
 }
 .postImage {
   height: 350px;
@@ -59,11 +63,25 @@ code {
   width: 350px;
   justify-content: center;
 }
-
-.nav-logo{
-  height: 50px;
-  width: 50px;
+.nav {
+  background-color: #C1DDD8;
+  height: 60px;
 }
+
+.navbar-nav li a{
+  color: black !important;
+
+}
+.nav-logo{
+  height: 80px;
+  width: 80px;
+
+}
+.userPosts-header{
+  background-color: #F5E4DC;
+  text-align: center;
+}
+
 
 .received {
   background-color: #F2C2C2;
@@ -84,7 +102,8 @@ code {
   margin-left: 5%;
   background-color:#F2C2C2;
   width:400px;
-  padding:10px;
+  height: 200px;
+  padding:5px;
   border-radius:15px;
   border-bottom-left-radius:0px;
   margin-top: 1%;
@@ -94,10 +113,16 @@ code {
   margin-left: 5%;
   background-color:#9EC4C5;
   width:400px;
-  padding:10px;
+  height: 200px;
+
+  padding:5px;
   border-radius:15px;
   border-bottom-right-radius:0px;
   margin-top: 1%;
+}
+.date{
+  float: right;
+  font-size:small;
 }
 
 .messageCurlHolder{
@@ -239,4 +264,21 @@ code {
 }
 .message{
   margin-left: 5px;
+}
+
+.modalContainer {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.modalButton {
+  min-width: 100px;
+  padding: 16px 32px;
+  border-radius: 4px;
+  border: none;
+  background: #141414;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
 }

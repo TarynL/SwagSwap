@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Jumbotron, Container } from 'reactstrap';
 import Post from "./Post";
+import Swag from "../../images/Swag.png"
 import { getAllPosts } from "../../modules/postManager";
 import { getPostsByCategoryId } from "../../modules/postManager";
 import { getAllCategories } from "../../modules/categoryManager";
@@ -53,12 +54,9 @@ const PostList = () => {
     return (
         <>
             <div >
-                <Jumbotron fluid className="header">
-                    <Container fluid>
-                        {/* <div className="header m-2 p-2 "> */}
-                        <h1><b>Out With The Old, In With The New...For You</b></h1>
-                    </Container>
-                </Jumbotron>
+                <div className="header landingLogo">
+                    <img className="" style={{ height: 300, width: 300, }} src={Swag} />
+                </div>
                 <div className="container w-25 text-center">
                     <div className="row  ">
                         <div className="col sm-3">
@@ -71,8 +69,8 @@ const PostList = () => {
                                 ))}
                             </select>
                             <div >
-                                <Button className="filterButton btn btn-light" onClick={handleFilter}>Filter</Button>
-                                <Button className="resetButton btn btn-light" onClick={handleReset}> Reset</Button>
+                                <Button className="filterButton btn-sm btn-light" onClick={handleFilter}>Filter</Button>
+                                <Button className="resetButton btn-sm btn-light" onClick={handleReset}> Reset</Button>
                             </div>
                         </div>
                     </div>
@@ -91,13 +89,13 @@ const PostList = () => {
             </div>
 
 
-            <div className="postlist">
+            <Container className="postlist ">
                 <div className="row ">
                     {posts.map((post) => (
                         <Post post={post} key={post.id} />
                     ))}
                 </div>
-            </div>
+            </Container>
 
         </>
     );
