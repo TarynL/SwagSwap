@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardBody, Button, CardFooter, Col, Row } from "reactstrap";
-import Modal from "./modal";
+import EditModal from "./EditModal";
 
 const MyPost = ({ myPost, handleDelete }) => {
-    const [showModal, setShowModal] = useState(false)
 
-    const openModal = () => {
-        setShowModal(prev => !prev)
-    }
+
+
+
 
     return (
         <>
@@ -20,10 +19,16 @@ const MyPost = ({ myPost, handleDelete }) => {
 
                         </CardBody>
                         <CardFooter className="text-center cardFooter">
-                            <Link to={`/post/edit/${myPost.id}`}>
-                                <Button className="edit  btn-sm btn-light" onClick={openModal}>Edit</Button>
-                            </Link>
-                            <div showModal={showModal} setShowModal={setShowModal}></div>
+                            {/* <Link to={`/post/edit/${myPost.id}`}> */}
+                            <Button className="edit  btn-sm btn-light" data-toggle="modal" data-target="#editModal" id="editBtn">Edit</Button>
+                            {/* </Link> */}
+                            <div id="editModal" className="modal fade" role="form">
+                                <div className="modal-dialog">
+                                    <div className="modal-content">
+                                        {EditModal}
+                                    </div>
+                                </div>
+                            </div>
                             <Link>
                                 <Button className="delete btn-sm btn-light" onClick={() => handleDelete(myPost.id)}>Delete</Button>
                             </Link>
