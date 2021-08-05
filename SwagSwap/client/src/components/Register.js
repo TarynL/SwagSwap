@@ -61,7 +61,7 @@ export default function Register() {
 
     return (
         <>
-            <div className="container w-75 text-center login">
+            <div className="container w-50 registerForm text-center login">
                 {/* <div className="row"> */}
                 <div  >
                     <img style={{ height: 150, width: 150 }} src={Swag} />

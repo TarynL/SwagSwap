@@ -266,19 +266,8 @@ code {
   margin-left: 5px;
 }
 
-.modalContainer {
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-}
 
-.modalButton {
-  min-width: 100px;
-  padding: 16px 32px;
-  border-radius: 4px;
-  border: none;
-  background: #141414;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
+
+.registerForm{
+  width: 80% !important;
 }

@@ -5,7 +5,6 @@ import Register from "./Register";
 import PostList from "./posts/PostList";
 import MyPostList from "./myPosts/MyPostList";
 import MyPostForm from "./myPosts/MyPostForm";
-import MyPostEdit from "./myPosts/MyPostEdit";
 import PostDetails from "./posts/PostDetails";
 import MessageList from "./messages/MessageList";
 import MyMessageList from "./messages/MyMessageList";
@@ -31,9 +30,6 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <MyPostForm /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/post/edit/:id" exact>
-                    {isLoggedIn ? <MyPostEdit /> : <Redirect to="/login" />}
-                </Route>
 
                 <Route path="/post/:id" exact>
                     {isLoggedIn ? <PostDetails /> : <Redirect to="/login" />}

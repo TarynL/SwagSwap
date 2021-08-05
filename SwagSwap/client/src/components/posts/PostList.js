@@ -40,8 +40,7 @@ const PostList = () => {
     }
 
     const handleReset = () => {
-
-        getPosts()
+        getPosts();
     }
 
 
@@ -55,12 +54,11 @@ const PostList = () => {
         <>
             <div >
                 <div className="header landingLogo">
-                    <img className="" style={{ height: 300, width: 300, }} src={Swag} />
+                    <img className="" style={{ height: 200, width: 200, }} src={Swag} />
                 </div>
                 <div className="container w-25 text-center">
                     <div className="row  ">
                         <div className="col sm-3">
-                            {/* <Label for="categoryId">Filter by Category</Label> */}
                             <select onChange={handleCategoryDropdown} name="categoryId" id="categoryId" className='form-control'>
                                 <option value="0">Filter by Category</option>
                                 {category.map(c => (
@@ -74,17 +72,6 @@ const PostList = () => {
                             </div>
                         </div>
                     </div>
-                    {/* <FormGroup className="Col-md-6 m-2 p-2 float-right">
-                        <Label for="value">Filter by Value</Label>
-                        <select name="value" id="value" className='form-control'>
-                            <option value="0">Filter by Value</option>
-                            <option value="1">Under $50</option>
-                            <option value="2">$50-$100</option>
-                            <option value="3">$100-$150</option>
-                            <option value="">$150 and Up</option>
-
-                        </select>
-                    </FormGroup> */}
                 </div>
             </div>
 

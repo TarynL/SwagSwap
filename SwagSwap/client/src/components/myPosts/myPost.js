@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardBody, Button, CardFooter, Col, Row } from "reactstrap";
-import EditModal from "./EditModal";
+import { getPostById } from "../../modules/postManager";
 
-const MyPost = ({ myPost, handleDelete }) => {
+const MyPost = ({ myPost, handleDelete, setEditPost, toggleModal }) => {
 
 
-
+    const handleSetEdit = (postId) => {
+        toggleModal()
+        getPostById(postId)
+            .then(res => setEditPost(res))
+    }
 
 
     return (
@@ -19,18 +23,9 @@ const MyPost = ({ myPost, handleDelete }) => {
 
                         </CardBody>
                         <CardFooter className="text-center cardFooter">
-                            {/* <Link to={`/post/edit/${myPost.id}`}> */}
-                            <Button className="edit  btn-sm btn-light" data-toggle="modal" data-target="#editModal" id="editBtn">Edit</Button>
-                            {/* </Link> */}
-                            <div id="editModal" className="modal fade" role="form">
-                                <div className="modal-dialog">
-                                    <div className="modal-content">
-                                        {EditModal}
-                                    </div>
-                                </div>
-                            </div>
+                            <Button className="edit  btn-sm btn-light" onClick={() => handleSetEdit(myPost?.id)} id="editBtn">Edit</Button>
                             <Link>
-                                <Button className="delete btn-sm btn-light" onClick={() => handleDelete(myPost.id)}>Delete</Button>
+                                <Button className="delete btn-sm btn-light" onClick={() => handleDelete(myPost?.id)}>Delete</Button>
                             </Link>
                             <Link to={`/messages/${myPost.id}`}>
                                 <Button className="message btn-sm btn-light">Messages</Button>

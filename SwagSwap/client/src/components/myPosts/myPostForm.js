@@ -82,7 +82,7 @@ const MyPostForm = () => {
 
     return (
         <Form className="newPost container w-50 text-center">
-            <h2 className="newPost-header">New Post</h2>
+            <h3 className="newPost-header">New Post</h3>
             <div className="newPost-form">
                 <FormGroup >
                     <Label for="imageUrl">Image</Label>
@@ -108,10 +108,10 @@ const MyPostForm = () => {
                 </FormGroup>
                 <FormGroup>
                     <Label for="description">Description</Label>
-                    <textarea type="text" name="description" id="description" placeholder="description"
+                    <Input type="textarea" name="description" id="description" placeholder="description"
                         value={newPost.description}
                         onChange={handleInputChange}
-                        rows="5" cols="50" />
+                    />
                 </FormGroup>
                 <FormGroup>
                     <Label for="value">Value</Label>
