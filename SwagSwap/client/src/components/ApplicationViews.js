@@ -26,14 +26,14 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <SelectedUserPostList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/post/add" exact>
+                {/* <Route path="/post/add" exact>
                     {isLoggedIn ? <MyPostForm /> : <Redirect to="/login" />}
-                </Route>
+                </Route> */}
 
 
-                <Route path="/post/:id" exact>
+                {/* <Route path="/post/:id" exact>
                     {isLoggedIn ? <PostDetails /> : <Redirect to="/login" />}
-                </Route>
+                </Route> */}
 
                 <Route path="/message/:id" exact>
                     {isLoggedIn ? <MessageList /> : <Redirect to="/login" />}

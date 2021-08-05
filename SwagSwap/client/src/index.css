@@ -271,3 +271,8 @@ code {
 .registerForm{
   width: 80% !important;
 }
+
+.headerModal, .footerModal{
+  background-color: #F5E4DC !important;
+
+}
