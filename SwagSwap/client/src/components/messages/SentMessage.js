@@ -18,7 +18,7 @@ const SentMessage = ({ message }) => {
                     <CardBody className="card-content  sent">
                         <p >{message?.content}</p>
                         <p >To: {message.userProfile.displayName}</p>
-                        <p >Date: {handleDate()}</p>
+                        <p className="date">Sent on: {handleDate()}</p>
 
 
                     </CardBody>

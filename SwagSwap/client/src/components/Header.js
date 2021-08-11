@@ -19,7 +19,7 @@ export default function Header({ isLoggedIn }) {
 
     return (
         <div >
-            <Navbar color="dark" dark expand="md">
+            <Navbar className="nav" expand="md">
                 <NavbarBrand tag={RRNavLink} to="/"><img className="nav-logo" src={Swag} /></NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
@@ -33,8 +33,8 @@ export default function Header({ isLoggedIn }) {
                                     <NavLink tag={RRNavLink} to="/myPosts">My Posts</NavLink>
                                 </NavItem>
 
-                                <NavItem>
-                                    <a aria-current="page" className="nav-link"
+                                <NavItem >
+                                    <a aria-current="page" className="nav-link "
                                         style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
                                 </NavItem>
                             </>

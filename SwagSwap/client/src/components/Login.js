@@ -24,11 +24,10 @@ export default function Login() {
                     <img style={{ height: 150, width: 150 }} src={Swag} />
                 </div>
                 <div  >
-                    <img src="groupshot.png" />
+                    <img style={{ height: 250, width: 350 }} src="groupshot.png" />
                 </div>
 
                 <Form className="container w-50 text-center" onSubmit={loginSubmit}>
-
                     <fieldset>
 
                         <FormGroup >

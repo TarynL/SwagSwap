@@ -16,7 +16,7 @@ const ReceivedMessage = ({ message }) => {
                     <CardBody className="card-content received">
                         <p >{message?.content}</p>
                         <p >From: {message.userProfile.displayName}</p>
-                        <p >Date: {handleDate()}</p>
+                        <p className="date">Sent on: {handleDate()}</p>
 
                     </CardBody>
                 </Card>

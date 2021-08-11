@@ -14,19 +14,47 @@ code {
     monospace;
 }
 
+.mylist {
+  margin: 3rem;
+}
 
-.header{
+.newPost, .editPost{
+  border: solid 15px #F2C2C2;
+  padding: 0 0 4rem 0;
+}
+
+.newPost-header, .editPost-header{
+  /* margin: 1rem 0 3rem 0; */
+  padding: 2rem;
+  background-color: #F2c2c2;
+}
+
+.newPost-form, .editPost-form{
+  margin: 0 1rem 1rem 1rem;
+}
+.newPost-cancel, .editPost-cancel{
+  margin-left: 1rem;
+}
+
+
+.imageInput{
+  margin-left: 7rem;
+}
+/* .header{
   background-color: #F5E4DC;
-  height: 200px;
-  font-size: 100px;
-  justify-self: center;
-  text-align: center;
- 
-  /* background-image: url("../src/images/clothesStack.jpg"); */
+  height: 5px;
+  
+} */
+.header{
+  margin-top: 0;
+}
+.landingLogo {
+  display:flex;
+  justify-content: center;
 }
 .postImage {
-  height: 300px;
-  width: 250px;
+  height: 350px;
+  width: 300px;
   
 }
 
@@ -35,11 +63,25 @@ code {
   width: 350px;
   justify-content: center;
 }
-
-.nav-logo{
-  height: 50px;
-  width: 50px;
+.nav {
+  background-color: #C1DDD8;
+  height: 60px;
 }
+
+.navbar-nav li a{
+  color: black !important;
+
+}
+.nav-logo{
+  height: 80px;
+  width: 80px;
+
+}
+.userPosts-header{
+  background-color: #F5E4DC;
+  text-align: center;
+}
+
 
 .received {
   background-color: #F2C2C2;
@@ -60,7 +102,8 @@ code {
   margin-left: 5%;
   background-color:#F2C2C2;
   width:400px;
-  padding:10px;
+  height: 200px;
+  padding:5px;
   border-radius:15px;
   border-bottom-left-radius:0px;
   margin-top: 1%;
@@ -70,10 +113,16 @@ code {
   margin-left: 5%;
   background-color:#9EC4C5;
   width:400px;
-  padding:10px;
+  height: 200px;
+
+  padding:5px;
   border-radius:15px;
   border-bottom-right-radius:0px;
   margin-top: 1%;
+}
+.date{
+  float: right;
+  font-size:small;
 }
 
 .messageCurlHolder{
@@ -92,39 +141,9 @@ code {
 .convo-cards {
  
   height: 675px;
-  overflow: scroll;
+  overflow: auto ;
+  
 }
-/* 
-.messageCurl{
-  width:10px;
-  height:10px;
-  background-color:#F2C2C2;
-  border-bottom-right-radius: 5px 5px;
-} */
-
-
-/* .messageCurlCover{
-  margin-left: 2%;
-  content: "";
-  margin:-5px;
-  margin-left:0px;
-  width:20px;
-  height:20px;
-  border-radius: 50%;
-  background-color: #F2C2C2;
-}
- */
-
-
-
-
-.card-date{
-  font-size: 25px;
-}
-
-.card-name{
-  font-size:35px;
-} 
 
 
 .message-container-cards{
@@ -155,3 +174,105 @@ code {
   margin-bottom: 3rem;
 }
 
+
+
+.flip-card {
+  background-color: transparent;
+  height: 350px;
+  width: 300px;
+  padding: 0;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #C1DDD8;
+  color: black;
+  border: 0;
+}
+
+/* Style the back side */
+.flip-card-back {
+  /* background-color: dodgerblue;
+  color: white; */
+  transform: rotateY(180deg);
+}
+
+.detailsPost-card {
+  height: 350px;
+  width: 300px;
+  border: 0;
+  border-left: 4px solid #F5E4DC ;
+  background-color: #C1DDD8 ;
+  text-align: left;
+}
+
+.detailsPost-message{
+  display:inline-block;
+  margin-left: 1rem;
+}
+
+.myPostCard {
+  height: 400px;
+  width: 300px;
+  margin-bottom: 2rem;
+}
+
+.card-content{
+  height: 350px;
+  width: 300px
+}
+
+.cardFooter{
+  background-color: #F5E4DC;
+  width: 300px
+ 
+}
+.add{
+  float: right;
+  margin: 1rem 2rem 0 0;
+  padding: 5px;
+  
+}
+.edit{
+  margin-right: 5px;
+}
+.message{
+  margin-left: 5px;
+}
+
+
+
+.registerForm{
+  width: 80% !important;
+}
+
+.headerModal, .footerModal{
+  background-color: #F5E4DC !important;
+
+}
