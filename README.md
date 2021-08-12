@@ -1,6 +1,6 @@
 # SwagSwap
 
-##About
+## About
 A full stack application that allows users to trade their clothing with other like minded users in their area. Rather than throwing out old clothing to buy brand new clothing this application will assist you in living a more sustainable lifestyle.
 
 ### Built With
