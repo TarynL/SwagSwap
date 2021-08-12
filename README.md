@@ -24,15 +24,15 @@ A full stack application that allows users to trade their clothing with other li
 ## Wireframe and ERD
 
 WireFrame
-![wireframe](src/images/wireframe.png?raw=true "Wireframe")
+![wireframe](SwagSwap/client/src/images/wireframe.png?raw=true "Wireframe")
 
 ERD
-![erd](src/images/ERD.png?raw=true "ERD")
+![erd](SwagSwap/client/src/images/ERD.png?raw=true "ERD")
 
 ## Preview
 
 Landing Page
-![landing](src/images/landing.png?raw=true "Landing")
+![landing](SwagSwap/client/src/images/landing.png?raw=true "Landing")
 
 Messages
-![messages](src/images/messages.png?raw=true "Messages")
+![messages](SwagSwap/client/src/images/messages.png?raw=true "Messages")
