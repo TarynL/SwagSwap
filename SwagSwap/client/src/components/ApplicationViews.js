@@ -3,9 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import PostList from "./posts/PostList";
-import MyPostList from "./myPosts/MyPostList";
-import MyPostForm from "./myPosts/MyPostForm";
-import PostDetails from "./posts/PostDetails";
+import MyPostList from "./myPosts/myPostList";
 import MessageList from "./messages/MessageList";
 import MyMessageList from "./messages/MyMessageList";
 import SelectedUserPostList from "./posts/SelectedUserPostList"

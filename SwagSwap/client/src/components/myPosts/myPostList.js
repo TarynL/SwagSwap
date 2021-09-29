@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MyPost from "./MyPost";
+import MyPost from "./myPost";
 import { Link, useHistory } from "react-router-dom";
 import { getAllPostsFromCurrentUser, deletePost } from "../../modules/postManager";
 import { ModalHeader, Modal, ModalBody, ModalFooter, Button, Input } from "reactstrap";
